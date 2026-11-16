@@ -1,16 +1,271 @@
-## Hi there 👋
+<!-- Profile README for github.com/santoshmyakala -->
 
-<!--
-**santoshmyakala/santoshmyakala** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<div align="center">
 
-Here are some ideas to get you started:
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/header-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/header-light.svg">
+  <img alt="Santoshkumar Myakala — Cloud Architect | DevOps & SRE | Platform Engineering | MLOps & AI Infrastructure" src="./assets/header-dark.svg" width="100%">
+</picture>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<a href="https://github.com/santoshmyakala">
+  <img alt="Cloud & Infrastructure Architecture · DevOps and Site Reliability Engineering · Platform Engineering · MLOps and AI Infrastructure · Kubernetes and Cloud Automation" src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&duration=2800&pause=1200&color=58A6FF&center=true&vCenter=true&width=620&lines=Cloud+%26+Infrastructure+Architecture;DevOps+and+Site+Reliability+Engineering;Platform+Engineering;MLOps+and+AI+Infrastructure;Kubernetes+and+Cloud+Automation">
+</a>
+
+<br>
+
+<a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Santoshkumar%20Myakala-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+<a href="https://github.com/santoshmyakala?tab=repositories"><img alt="GitHub repositories" src="https://img.shields.io/badge/GitHub-Repositories-24292f?style=for-the-badge&logo=github&logoColor=white"></a>
+<img alt="Location: Stockholm, Sweden" src="https://img.shields.io/badge/Based%20in-Stockholm%2C%20Sweden-2ea043?style=for-the-badge">
+
+</div>
+
+---
+
+## About
+
+DevOps, Cloud and Platform Engineering professional with **15+ years in IT**, including **~10 years in DevOps architecture** across automotive, manufacturing software and gaming — in Sweden, Belgium, France, Germany and India.
+
+I design and build the platforms engineers ship on: **multi-account AWS environments**, **Kubernetes platforms with GitOps**, **reusable Terraform patterns**, and **large-scale CI/CD** for cloud, embedded and hardware-in-the-loop workloads. I contribute to architecture strategy through **ADRs, architecture workshops, PoCs and technology evaluations**, and take selected solutions from PoC through production adoption.
+
+**Current focus:** AI-driven DevOps and AIOps — agentic approaches to CI log and alert analysis, failure classification and automated L1 triage — alongside MLOps and AI platform engineering.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**What I work on**
+- CI/CD and developer platform architecture
+- Cloud infrastructure, networking and IAM on AWS
+- Kubernetes, Helm and GitOps with Argo CD
+- HIL/SIL test pipelines for embedded systems
+- DevSecOps, identity and secure platform access
+- Reliability, observability and FinOps
+
+</td>
+<td width="50%" valign="top">
+
+**Open to**
+- AI Platform Engineering
+- MLOps / ML Infrastructure
+- DevOps & Cloud Architecture
+- Platform Engineering
+
+</td>
+</tr>
+</table>
+
+## Experience
+
+| Period | Role | Organisation | Highlights |
+|---|---|---|---|
+| 2024 – present | DevOps Engineer, Driver System Software Factory | **Scania Group** (TRATON) | GitLab CI/CD and developer-platform architecture across cloud, Android, QNX, embedded and VM environments; automated HIL/SIL pipelines (build → deploy → flash → validate); targeted CI workflows improved by ~40–50%; standardised DevContainers |
+| 2023 – 2024 | Infrastructure Specialist | **Play'n GO** | AWS infrastructure with Terraform; networking, connectivity and SSL/TLS certificate lifecycle; Bitbucket delivery workflows |
+| 2022 – 2023 | Cloud Engineer (consultant) | **ECARX Europe / Volvo Cars** via Explipro | AWS with Terraform (networking, IAM, compute, Kubernetes); GitOps with Argo CD; Helm charts; CI/CD traceability; GitLab/JFrog upgrades via GitOps; OAuth 2.0, MFA, Microsoft Entra ID; DevSecOps |
+| 2017 – 2022 | Senior Product Development Engineer | **Hexagon Manufacturing Intelligence** | Enterprise CI/CD for multiple desktop and web products; led Perforce → GitLab migration |
+| 2021 – 2022 | DevOps Engineer (remote) | **Roller Gaming UK** | AWS infrastructure automation with Terraform |
+| 2012 – 2017 | Engineer → Senior Engineer | ALTEN · AMM Enterprise · Cyient · AXISCADES | GitLab CI/Jenkins pipelines, Azure deployments, Terraform, PostgreSQL data pipelines, automation |
+
+<sub>Full history on <a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/">LinkedIn</a>.</sub>
+
+## Technical expertise
+
+> **Production** = used in the professional roles above. **Projects** = demonstrated in the public repositories below. **Exploring** = currently learning.
+
+<table>
+<tr><th align="left" width="18%">Area</th><th align="left">Production</th><th align="left" width="26%">Projects</th><th align="left" width="16%">Exploring</th></tr>
+<tr>
+<td><b>Cloud platforms</b></td>
+<td>AWS (multi-account, VPC & networking, IAM, compute, storage) · Microsoft Azure · Microsoft Entra ID · Cloud networking · SSL/TLS</td>
+<td>Multi-AZ VPC design · WireGuard VPN · SSM-only access</td>
+<td>Google Cloud · Hybrid cloud</td>
+</tr>
+<tr>
+<td><b>DevOps & platform</b></td>
+<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Bash · Python · Linux</td>
+<td>Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
+<td>Internal developer platforms</td>
+</tr>
+<tr>
+<td><b>Observability & reliability</b></td>
+<td>SRE practices · Monitoring & alerting · ELK stack · Prometheus</td>
+<td>Elastic Stack 9 · Prometheus metrics in services</td>
+<td>Grafana · Loki · OpenTelemetry</td>
+</tr>
+<tr>
+<td><b>Security</b></td>
+<td>DevSecOps · IAM · OAuth 2.0 · MFA · Access control in CI/CD</td>
+<td>Sigstore keyless signing · SBOM attestation · Kyverno (CEL) admission · Trivy · Semgrep · gitleaks</td>
+<td>SLSA provenance</td>
+</tr>
+<tr>
+<td><b>Architecture</b></td>
+<td>CI/CD design · Build & release systems · Infrastructure architecture · ADRs, PoCs & technology evaluation · Cloud migration & legacy modernisation</td>
+<td>Threat modelling (STRIDE) · signature-gated promotion</td>
+<td>Bazel · Large-scale distributed systems</td>
+</tr>
+<tr>
+<td><b>MLOps & AI infrastructure</b></td>
+<td>AI-assisted CI log / failure triage (AIOps)</td>
+<td>MLflow tracking & registry · DVC pipelines · FastAPI model serving · Helm · CI/CD for ML · PyTorch</td>
+<td>Kubeflow · Model / drift monitoring</td>
+</tr>
+</table>
+
+<div align="center">
+<br>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=dark&perline=8">
+  <img alt="AWS, Azure, Terraform, Kubernetes, Docker, Ansible, GitLab, GitHub Actions, Jenkins, Linux, Bash, Python, Prometheus, Elasticsearch, PostgreSQL, Nginx" src="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=light&perline=8">
+</picture>
+<br><br>
+<img alt="Helm" src="https://img.shields.io/badge/Helm-0F1689?style=flat-square&logo=helm&logoColor=white">
+<img alt="Argo CD" src="https://img.shields.io/badge/Argo%20CD-EF7B4D?style=flat-square&logo=argo&logoColor=white">
+<img alt="JFrog Artifactory" src="https://img.shields.io/badge/JFrog-40BE46?style=flat-square&logo=jfrog&logoColor=white">
+<img alt="Microsoft Entra ID" src="https://img.shields.io/badge/Entra%20ID-0078D4?style=flat-square&logo=microsoft&logoColor=white">
+<img alt="Bitbucket" src="https://img.shields.io/badge/Bitbucket-0052CC?style=flat-square&logo=bitbucket&logoColor=white">
+</div>
+
+## How I typically build platforms
+
+A generalised view of the delivery platforms I have designed — not a specific employer's system.
+
+```mermaid
+flowchart LR
+  dev([Developer]) -->|push / MR| scm[GitLab]
+  subgraph ci[CI pipeline]
+    direction TB
+    build[Build in DevContainer] --> test[Unit / integration / HIL-SIL tests] --> scan[Security & licence scans] --> pub[Publish artifact]
+  end
+  scm --> ci
+  pub --> art[(JFrog Artifactory)]
+  pub -->|bump version| gitops[GitOps config repo]
+  gitops --> argo[Argo CD]
+  argo -->|Helm| k8s[Kubernetes on AWS]
+  tf[Terraform modules] -->|VPC · IAM · EKS| k8s
+  k8s --> obs[Metrics · logs · alerts]
+  obs -->|CI & alert analysis| ai[AI-assisted triage]
+  ai -.->|recommendations| dev
+```
+
+## Featured projects
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### [wine-quality-mlops](https://github.com/santoshmyakala/wine-quality-mlops)
+Reproducible ML lifecycle on a small, well-understood problem: **DVC pipeline → MLflow tracking & registry → FastAPI service with Prometheus metrics → hardened container → Helm chart**. CI retrains, gates on model quality, smoke-tests and Trivy-scans the image.
+
+`DVC` `MLflow` `scikit-learn` `FastAPI` `Prometheus` `Docker` `Helm` `GitHub Actions`
+
+<sub>Test RMSE 0.598 vs 0.874 mean baseline · 9 tests · non-root, read-only-FS pods with HPA</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [wave-energy-farm-ml](https://github.com/santoshmyakala/wave-energy-farm-ml)
+Predicting wave-farm power from 16-buoy layouts at four Australian sites (UCI, ~260k layouts). **Gradient boosting vs MLP vs a permutation-equivariant set transformer** with relative-position attention; data-leakage audit and blocked-split validation.
+
+`PyTorch` `scikit-learn` `MLflow` `pandas` `GitHub Actions`
+
+<sub>Set transformer R² 0.992 (Perth) · found 27k duplicate rows · random vs blocked split shows leakage</sub>
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### [aws-three-tier-platform](https://github.com/santoshmyakala/aws-three-tier-platform)
+HA **web → app → MongoDB replica set** across three AZs with a WireGuard VPN, least-privilege security groups and SSM-only access (no SSH). Offline **`terraform test`** suite with a mocked AWS provider asserts the security baseline.
+
+`Terraform` `AWS` `ALB` `Auto Scaling` `MongoDB` `WireGuard` `tflint` `Trivy`
+
+<sub>5 plan-level tests · IMDSv2 · encrypted volumes · VPC flow logs</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [ansible-elk-stack](https://github.com/santoshmyakala/ansible-elk-stack)
+Secured **Elastic Stack 9** via Ansible roles: auth on by default, least-privilege Logstash writer, Kibana only behind an Nginx TLS proxy, Vault-managed secrets. CI deploys on a fresh runner, enforces idempotency and verifies a log event end to end.
+
+`Ansible` `Elasticsearch` `Logstash` `Kibana` `Nginx` `Docker`
+
+<sub>ansible-lint production profile · idempotent (changed=0) · end-to-end verify playbook</sub>
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### [fashion-mnist-neural-networks](https://github.com/santoshmyakala/fashion-mnist-neural-networks)
+Image classification with **softmax regression → MLP → CNN** in PyTorch, one shared pipeline, so each architectural step is measured. Checksum-verified data loader, validation-based model selection, prediction CLI.
+
+`PyTorch` `NumPy` `MLflow` `GitHub Actions`
+
+<sub>Test accuracy 84.1% → 90.6% → 93.5%</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline)
+Central **secure software supply chain**: a reusable workflow (gitleaks → Semgrep → Trivy → SBOM → image gate → **keyless Sigstore signing**), signature-gated GitOps promotion, **Argo CD** app-of-apps, and **Kyverno 1.20** policies that admit only images signed by the pipeline.
+
+`GitHub Actions` `Sigstore/cosign` `Syft` `Trivy` `Semgrep` `Argo CD` `Kyverno` `kind`
+
+<sub>13 policy unit tests · kind e2e: unsigned, privileged and root workloads denied · used by wine-quality-mlops</sub>
+
+</td>
+</tr>
+</table>
+
+<sub>Every project ships with CI, tests, results from real runs, SHA-pinned actions, secret scanning and Dependabot. Data sources are cited with their licences. The ML projects began as coursework from my PG Diploma in Machine Learning and were rebuilt as production-style reference implementations.</sub>
+
+## Certifications & education
+
+<table>
+<tr><td valign="top" width="50%">
+
+**Cloud, architecture & reliability**
+- Software Architecture & Technology of Large-Scale Systems — NewTechWays (2025)
+- Cloud Security Lead — Scania Group (2024)
+- Cloud Leader AWS — Scania Group (2024)
+- AWS VPC and Networking in Depth — Udemy (2023)
+- DevOps Specialization — CloudxLab (2022)
+- Developing a Google SRE Culture — Coursera / Google Cloud (2021)
+- Google Cloud Platform Fundamentals: Core Infrastructure — Coursera (2021)
+
+</td><td valign="top" width="50%">
+
+**Data & machine learning**
+- Big Data Engineering with Hadoop & Spark — EICT, IIT Roorkee (2019)
+- Big Data & Machine Learning Professional Degree — IBM (2019)
+- Data Science Professional Degree — NSDC (2019)
+- Deploying Scalable Machine Learning for Data Science — LinkedIn Learning (2021)
+- Machine Learning with Python — IBM / Cognitive Class (2021)
+
+**Education**
+- Master of Computer Applications — Andhra University
+- B.Tech, Aeronautical Engineering — JNTU (university top-5 rank)
+
+</td></tr>
+</table>
+
+## GitHub activity
+
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=santoshmyakala&show_icons=true&hide_border=true&theme=github_dark">
+  <img height="165" alt="GitHub statistics for santoshmyakala" src="https://github-readme-stats.vercel.app/api?username=santoshmyakala&show_icons=true&hide_border=true&theme=default">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=santoshmyakala&hide_border=true&theme=github-dark-blue">
+  <img height="165" alt="GitHub contribution streak for santoshmyakala" src="https://streak-stats.demolab.com?user=santoshmyakala&hide_border=true&theme=default">
+</picture>
+</div>
+
+---
+
+<div align="center">
+<sub>Open to conversations about platform engineering, AI infrastructure and cloud architecture — reach out on <a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/">LinkedIn</a>.</sub>
+</div>
