@@ -24,7 +24,7 @@
 
 ## About
 
-DevOps, Cloud and Platform Engineering professional with **15+ years in IT**, including **~10 years in DevOps architecture** across automotive, manufacturing software and gaming — in Sweden, Belgium, France, Germany and India.
+DevOps, Cloud and Platform Engineering professional with **15+ years in IT**, including **~12 years in DevOps architecture** across automotive, manufacturing software and gaming — in Sweden, Belgium, France, Germany and India.
 
 I design and build the platforms engineers ship on: **multi-account AWS environments**, **Kubernetes platforms with GitOps**, **reusable Terraform patterns**, and **large-scale CI/CD** for cloud, embedded and hardware-in-the-loop workloads. I contribute to architecture strategy through **ADRs, architecture workshops, PoCs and technology evaluations**, and take selected solutions from PoC through production adoption.
 
