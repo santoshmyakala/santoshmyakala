@@ -24,7 +24,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/impact-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/impact-light.svg">
-  <img alt="15+ years in IT; 10 years DevOps and cloud; 10 tested project repos; 10 Terraform stacks tested; 127 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
+  <img alt="15+ years in IT; 12 years DevOps and cloud; 10 tested project repos; 12 Terraform stacks tested; 127 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
 </picture>
 
 </div>
