@@ -33,7 +33,7 @@
 
 ## About
 
-I design and build the platforms engineers ship on — **multi-account AWS and Azure foundations, Kubernetes with GitOps, large-scale CI/CD** (cloud, embedded and hardware-in-the-loop at Scania), and increasingly **GPU and AI infrastructure**. 15+ years in IT, ~10 in DevOps architecture, across Sweden, Belgium, France, Germany and India.
+I design and build the platforms engineers ship on — **multi-account AWS and Azure foundations, Kubernetes with GitOps, large-scale CI/CD** (cloud, embedded and hardware-in-the-loop at Scania), and increasingly **GPU and AI infrastructure**. 15+ years in IT, ~13 in DevOps architecture, across Sweden, Belgium, France, Germany and India.
 
 I work from architecture to production: ADRs, workshops, PoCs and technology evaluations, then hands-on delivery. My public repositories are built the same way — **every claim below is backed by code with passing CI**.
 
