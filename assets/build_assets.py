@@ -5,6 +5,7 @@
 Numbers in the impact strip are counted from the public repositories; update METRICS when they change.
 """
 
+import re
 from pathlib import Path
 from xml.sax.saxutils import escape as esc
 
@@ -21,7 +22,7 @@ THEMES = {
 
 METRICS = [  # (value, label) — verifiable from the repositories
     ("15+", "years in IT"),
-    ("10", "years DevOps & cloud"),
+    ("12", "years DevOps & cloud"),
     ("10", "tested project repos"),
     ("10", "Terraform stacks tested"),
     ("127", "automated tests in CI"),
@@ -119,7 +120,55 @@ def capability_map(t):
 {cols}</svg>"""
 
 
+STACK = [  # (category, [(icon file, label)]) — only technologies used in roles or public repos
+    ("Cloud", [("amazonwebservices", "AWS"), ("azure", "Azure"), ("googlecloud", "Google Cloud")]),
+    ("Containers & GitOps", [("docker", "Docker"), ("kubernetes", "Kubernetes"), ("helm", "Helm"), ("argocd", "Argo CD")]),
+    ("CI/CD", [("jenkins", "Jenkins"), ("gitlab", "GitLab CI"), ("githubactions", "GitHub Actions"),
+               ("azuredevops", "Azure DevOps"), ("bitbucket", "Bitbucket"), ("jfrog", "JFrog")]),
+    ("IaC & security", [("terraform", "Terraform"), ("ansible", "Ansible"), ("trivy", "Trivy"), ("falco", "Falco")]),
+    ("Observability", [("prometheus", "Prometheus"), ("elasticsearch", "Elasticsearch"), ("logstash", "Logstash"),
+                       ("kibana", "Kibana")]),
+    ("AI, GPU & ML", [("nvidia", "NVIDIA"), ("pytorch", "PyTorch"), ("mlflow", "MLflow"), ("dvc", "DVC"),
+                      ("scikitlearn", "scikit-learn"), ("fastapi", "FastAPI"), ("claude", "Claude")]),
+    ("Languages & OS", [("python", "Python"), ("bash", "Bash"), ("linux", "Linux"), ("postgresql", "PostgreSQL"),
+                        ("nginx", "Nginx")]),
+]
+
+
+def _inline_icon(name: str, x: float, y: float, size: float) -> str:
+    """Embed an icon SVG as a nested <svg>, prefixing its ids so several icons can share one document."""
+    src = (OUT / "icons" / f"{name}.svg").read_text()
+    view_box = re.search(r'viewBox="([^"]+)"', src).group(1)
+    inner = re.sub(r"^.*?<svg[^>]*>|</svg>\s*$", "", src, flags=re.S)
+    inner = re.sub(r'id="([^"]+)"', rf'id="{name}-\1"', inner)
+    inner = re.sub(r"url\(#([^)]+)\)", rf"url(#{name}-\1)", inner)
+    inner = re.sub(r'href="#([^"]+)"', rf'href="#{name}-\1"', inner)
+    return f'<svg x="{x}" y="{y}" width="{size}" height="{size}" viewBox="{view_box}">{inner}</svg>'
+
+
+def stack(t):
+    label_w, tile, gap, row_h, width = 180, 64, 22, 104, 1164
+    rows = ""
+    for r, (category, items) in enumerate(STACK):
+        y = r * row_h
+        rows += f'<text x="0" y="{y + 38}" class="cat">{esc(category)}</text>'
+        rows += f'<line x1="0" y1="{y + row_h - 8}" x2="{width}" y2="{y + row_h - 8}" stroke="{t["border"]}" stroke-dasharray="2 6"/>'
+        for i, (icon, label) in enumerate(items):
+            x = label_w + i * (tile + gap + 48)
+            rows += (f'<g class="t" style="animation-delay:{(r * 7 + i) * 0.04:.2f}s">'
+                     f'<rect x="{x}" y="{y + 4}" width="{tile}" height="{tile}" rx="14" fill="#ffffff" stroke="{t["border"]}"/>'
+                     + _inline_icon(icon, x + 12, y + 16, 40) +
+                     f'<text x="{x + tile / 2}" y="{y + tile + 22}" class="lbl">{esc(label)}</text></g>')
+    height = len(STACK) * row_h
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{esc('Tech stack: ' + '; '.join(c + ': ' + ', '.join(l for _, l in it) for c, it in STACK))}">
+<style>.cat{{font:700 15px {FONT};fill:{t['text']}}} .lbl{{font:500 12px {FONT};fill:{t['muted']};text-anchor:middle}}
+.t{{animation:pop .5s ease-out both}} @keyframes pop{{from{{opacity:0;transform:translateY(6px)}}to{{opacity:1;transform:none}}}}
+@media (prefers-reduced-motion:reduce){{.t{{animation:none}}}}</style>
+{rows}</svg>"""
+
+
 for theme, t in THEMES.items():
+    (OUT / f"stack-{theme}.svg").write_text(stack(t))
     (OUT / f"header-{theme}.svg").write_text(header(t))
     (OUT / f"impact-{theme}.svg").write_text(impact(t))
     (OUT / f"capabilities-{theme}.svg").write_text(capability_map(t))

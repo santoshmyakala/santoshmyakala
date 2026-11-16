@@ -33,7 +33,7 @@
 
 ## About
 
-I design and build the platforms engineers ship on — **multi-account AWS and Azure foundations, Kubernetes with GitOps, large-scale CI/CD** (cloud, embedded and hardware-in-the-loop at Scania), and increasingly **GPU and AI infrastructure**. 15+ years in IT, ~12 in DevOps architecture, across Sweden, Belgium, France, Germany and India.
+I design and build the platforms engineers ship on — **multi-account AWS and Azure foundations, Kubernetes with GitOps, large-scale CI/CD** (cloud, embedded and hardware-in-the-loop at Scania), and increasingly **GPU and AI infrastructure**. 15+ years in IT, 12 in DevOps and cloud, across Sweden, Belgium, France, Germany and India.
 
 I work from architecture to production: ADRs, workshops, PoCs and technology evaluations, then hands-on delivery. My public repositories are built the same way — **every claim below is backed by code with passing CI**.
 
@@ -49,6 +49,17 @@ I work from architecture to production: ADRs, workshops, PoCs and technology eva
 </div>
 
 **Current focus:** AI-driven DevOps (agentic CI-failure triage, alert analysis), AI platform engineering and MLOps.
+
+## Tech stack
+
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg">
+  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Observability: Prometheus, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Languages and OS: Python, Bash, Linux, PostgreSQL, Nginx" src="./assets/stack-dark.svg" width="100%">
+</picture>
+</div>
+
 
 ## Featured projects
 
@@ -223,7 +234,7 @@ Proof, not claims — every featured repository is tested on every push:
 
 <sub>Full history on <a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/">LinkedIn</a>.</sub>
 
-## Technical expertise
+## Skills matrix
 
 <details>
 <summary><b>Show the full skills matrix (Production · Projects · Exploring)</b></summary>
@@ -272,19 +283,7 @@ Proof, not claims — every featured repository is tested on every push:
 
 </details>
 
-<div align="center">
-<br>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=dark&perline=8">
-  <img alt="AWS, Azure, Terraform, Kubernetes, Docker, Ansible, GitLab, GitHub Actions, Jenkins, Linux, Bash, Python, Prometheus, Elasticsearch, PostgreSQL, Nginx" src="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=light&perline=8">
-</picture>
-<br><br>
-<img alt="Helm" src="https://img.shields.io/badge/Helm-0F1689?style=flat-square&logo=helm&logoColor=white">
-<img alt="Argo CD" src="https://img.shields.io/badge/Argo%20CD-EF7B4D?style=flat-square&logo=argo&logoColor=white">
-<img alt="JFrog Artifactory" src="https://img.shields.io/badge/JFrog-40BE46?style=flat-square&logo=jfrog&logoColor=white">
-<img alt="Microsoft Entra ID" src="https://img.shields.io/badge/Entra%20ID-0078D4?style=flat-square&logo=microsoft&logoColor=white">
-<img alt="Bitbucket" src="https://img.shields.io/badge/Bitbucket-0052CC?style=flat-square&logo=bitbucket&logoColor=white">
-</div>
+
 
 ## How I typically build platforms
 
