@@ -24,7 +24,7 @@
 
 ## About
 
-DevOps, Cloud and Platform Engineering professional with **15+ years in IT**, including **~12 years in DevOps architecture** across automotive, manufacturing software and gaming — in Sweden, Belgium, France, Germany and India.
+DevOps, Cloud and Platform Engineering professional with **15+ years in IT**, including **~10 years in DevOps architecture** across automotive, manufacturing software and gaming — in Sweden, Belgium, France, Germany and India.
 
 I design and build the platforms engineers ship on: **multi-account AWS environments**, **Kubernetes platforms with GitOps**, **reusable Terraform patterns**, and **large-scale CI/CD** for cloud, embedded and hardware-in-the-loop workloads. I contribute to architecture strategy through **ADRs, architecture workshops, PoCs and technology evaluations**, and take selected solutions from PoC through production adoption.
 
@@ -107,8 +107,8 @@ I design and build the platforms engineers ship on: **multi-account AWS environm
 <tr>
 <td><b>MLOps & AI infrastructure</b></td>
 <td>AI-assisted CI log / failure triage (AIOps)</td>
-<td>MLflow tracking & registry · DVC pipelines · FastAPI model serving · Helm · CI/CD for ML · PyTorch</td>
-<td>Kubeflow · Model / drift monitoring</td>
+<td>MLflow · DVC · FastAPI model serving · Helm · PyTorch DDP · NVIDIA GPU Operator · Slurm · Kueue · Claude API agents (tool use, RAG, evals)</td>
+<td>Model / drift monitoring · LLM observability</td>
 </tr>
 </table>
 
@@ -150,48 +150,122 @@ flowchart LR
 
 ## Featured projects
 
+#### ☁️ Cloud & platform architecture
+
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### [wine-quality-mlops](https://github.com/santoshmyakala/wine-quality-mlops)
-Reproducible ML lifecycle on a small, well-understood problem: **DVC pipeline → MLflow tracking & registry → FastAPI service with Prometheus metrics → hardened container → Helm chart**. CI retrains, gates on model quality, smoke-tests and Trivy-scans the image.
+### [cloud-solution-architectures](https://github.com/santoshmyakala/cloud-solution-architectures)
+**AWS and Azure side by side**: landing-zone guardrails (SCPs / Azure Policy), hub-and-spoke inspection networking (Transit Gateway + Network Firewall / Azure Firewall Premium), serverless event-driven intake, Kubernetes platform and multi-region DR — with ADRs and Well-Architected mapping.
 
-`DVC` `MLflow` `scikit-learn` `FastAPI` `Prometheus` `Docker` `Helm` `GitHub Actions`
+`Terraform` `AWS` `Azure` `Network Firewall` `Azure Policy` `Lambda` `Functions`
 
-<sub>Test RMSE 0.598 vs 0.874 mean baseline · 9 tests · non-root, read-only-FS pods with HPA</sub>
+<sub>6 Terraform stacks with offline <code>terraform test</code> · blocking Trivy IaC gate · identical validation logic on both clouds</sub>
 
 </td>
 <td width="50%" valign="top">
 
-### [wave-energy-farm-ml](https://github.com/santoshmyakala/wave-energy-farm-ml)
-Predicting wave-farm power from 16-buoy layouts at four Australian sites (UCI, ~260k layouts). **Gradient boosting vs MLP vs a permutation-equivariant set transformer** with relative-position attention; data-leakage audit and blocked-split validation.
+### [aws-three-tier-platform](https://github.com/santoshmyakala/aws-three-tier-platform)
+HA **web → app → MongoDB replica set** across three AZs with WireGuard VPN, least-privilege security groups and SSM-only access (no SSH).
 
-`PyTorch` `scikit-learn` `MLflow` `pandas` `GitHub Actions`
+`Terraform` `AWS` `ALB` `Auto Scaling` `MongoDB` `WireGuard`
 
-<sub>Set transformer R² 0.992 (Perth) · found 27k duplicate rows · random vs blocked split shows leakage</sub>
+<sub>5 plan-level tests with a mocked AWS provider · IMDSv2 · encrypted volumes</sub>
 
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 
-### [aws-three-tier-platform](https://github.com/santoshmyakala/aws-three-tier-platform)
-HA **web → app → MongoDB replica set** across three AZs with a WireGuard VPN, least-privilege security groups and SSM-only access (no SSH). Offline **`terraform test`** suite with a mocked AWS provider asserts the security baseline.
+### [ansible-elk-stack](https://github.com/santoshmyakala/ansible-elk-stack)
+Secured **Elastic Stack 9**: auth on, least-privilege Logstash writer, Kibana only behind an Nginx TLS proxy, Vault-managed secrets.
 
-`Terraform` `AWS` `ALB` `Auto Scaling` `MongoDB` `WireGuard` `tflint` `Trivy`
+`Ansible` `Elasticsearch` `Logstash` `Kibana` `Docker`
 
-<sub>5 plan-level tests · IMDSv2 · encrypted volumes · VPC flow logs</sub>
+<sub>Deployed for real in CI · idempotent (changed=0) · end-to-end verify playbook</sub>
+
+</td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+#### 🔐 DevSecOps & software supply chain
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline)
+Central **reusable secure-delivery workflow** (gitleaks → Semgrep → Trivy → SBOM → image gate → keyless Sigstore signing), signature-gated GitOps promotion, Argo CD, and **Kyverno 1.20** policies admitting only pipeline-signed images.
+
+`GitHub Actions` `Sigstore` `Syft` `Trivy` `Argo CD` `Kyverno` `kind`
+
+<sub>kind e2e: signed image admitted · unsigned, privileged, root and <code>:latest</code> denied</sub>
 
 </td>
 <td width="50%" valign="top">
 
-### [ansible-elk-stack](https://github.com/santoshmyakala/ansible-elk-stack)
-Secured **Elastic Stack 9** via Ansible roles: auth on by default, least-privilege Logstash writer, Kibana only behind an Nginx TLS proxy, Vault-managed secrets. CI deploys on a fresh runner, enforces idempotency and verifies a log event end to end.
+### [devsecops-reference-architectures](https://github.com/santoshmyakala/devsecops-reference-architectures)
+Eight DevSecOps architectures across platforms and lifecycle stages: GitHub, **GitLab**, **Azure DevOps** (Notation/Ratify), **AWS-native** (CodePipeline, Inspector, Signer), OPA/Conftest, **OWASP ZAP DAST**, External Secrets, **Falco**.
 
-`Ansible` `Elasticsearch` `Logstash` `Kibana` `Nginx` `Docker`
+`GitLab CI` `Azure DevOps` `AWS Signer` `OPA` `ZAP` `Falco` `External Secrets`
 
-<sub>ansible-lint production profile · idempotent (changed=0) · end-to-end verify playbook</sub>
+<sub>19 Rego tests · schema-validated pipelines · live ZAP scan: 118 rules passed, 2 findings fixed at source</sub>
+
+</td>
+</tr>
+</table>
+
+#### 🧠 AI infrastructure & agentic AI
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### [ai-infrastructure-hpc-gpu](https://github.com/santoshmyakala/ai-infrastructure-hpc-gpu)
+**GPU training platform** on Kubernetes (GPU Operator, MIG/time-slicing, Kueue, PyTorchJob, DCGM alerts) and **Slurm HPC** (GRES, IB topology, Pyxis), on **EKS p5 + EFA + FSx Lustre** and **AKS ND H100 v5 + Managed Lustre**, plus an NVIDIA licensing guide.
+
+`NVIDIA GPU Operator` `Slurm` `Kueue` `Kubeflow` `NCCL` `DCGM` `EFA` `Terraform`
+
+<sub>Real 2-process DDP training in CI · real <code>slurmctld</code> accepts the config · PyTorchJob validated against Kubeflow CRD</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [agentic-genai-platform](https://github.com/santoshmyakala/agentic-genai-platform)
+**Ops Copilot**: a retrieval-grounded **Claude** agent for platform operations — runbook RAG with citations, live tools (DCGM, CI, model API), human-approved side effects, prompt-injection fencing and secret redaction, evals.
+
+`Claude API` `Agents` `Tool use` `RAG` `FastAPI` `Prometheus`
+
+<sub>31 deterministic tests with a scripted model client · 7-case behavioural eval set · ships via the signed pipeline</sub>
+
+</td>
+</tr>
+</table>
+
+#### 📈 MLOps & machine learning
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### [wine-quality-mlops](https://github.com/santoshmyakala/wine-quality-mlops)
+Reproducible ML lifecycle: **DVC → MLflow tracking & registry → FastAPI + Prometheus → hardened container → Helm**, delivered through the central DevSecOps pipeline.
+
+`DVC` `MLflow` `scikit-learn` `FastAPI` `Helm` `Sigstore`
+
+<sub>Test RMSE 0.598 vs 0.874 baseline · signed image promoted to dev</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [wave-energy-farm-ml](https://github.com/santoshmyakala/wave-energy-farm-ml)
+Wave-farm power from 16-buoy layouts at four sites: **gradient boosting vs MLP vs a permutation-equivariant set transformer**, with a data-leakage audit.
+
+`PyTorch` `scikit-learn` `MLflow`
+
+<sub>Set transformer R² 0.992 (Perth) · 27k duplicate rows found · blocked split exposes leakage</sub>
 
 </td>
 </tr>
@@ -199,23 +273,14 @@ Secured **Elastic Stack 9** via Ansible roles: auth on by default, least-privile
 <td width="50%" valign="top">
 
 ### [fashion-mnist-neural-networks](https://github.com/santoshmyakala/fashion-mnist-neural-networks)
-Image classification with **softmax regression → MLP → CNN** in PyTorch, one shared pipeline, so each architectural step is measured. Checksum-verified data loader, validation-based model selection, prediction CLI.
+**Softmax regression → MLP → CNN** in PyTorch under one pipeline, so each architectural step is measured.
 
-`PyTorch` `NumPy` `MLflow` `GitHub Actions`
+`PyTorch` `NumPy` `MLflow`
 
 <sub>Test accuracy 84.1% → 90.6% → 93.5%</sub>
 
 </td>
-<td width="50%" valign="top">
-
-### [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline)
-Central **secure software supply chain**: a reusable workflow (gitleaks → Semgrep → Trivy → SBOM → image gate → **keyless Sigstore signing**), signature-gated GitOps promotion, **Argo CD** app-of-apps, and **Kyverno 1.20** policies that admit only images signed by the pipeline.
-
-`GitHub Actions` `Sigstore/cosign` `Syft` `Trivy` `Semgrep` `Argo CD` `Kyverno` `kind`
-
-<sub>13 policy unit tests · kind e2e: unsigned, privileged and root workloads denied · used by wine-quality-mlops</sub>
-
-</td>
+<td width="50%" valign="top"></td>
 </tr>
 </table>
 
