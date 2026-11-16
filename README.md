@@ -17,6 +17,15 @@
 <a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Santoshkumar%20Myakala-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
 <a href="https://github.com/santoshmyakala?tab=repositories"><img alt="GitHub repositories" src="https://img.shields.io/badge/GitHub-Repositories-24292f?style=for-the-badge&logo=github&logoColor=white"></a>
 <img alt="Location: Stockholm, Sweden" src="https://img.shields.io/badge/Based%20in-Stockholm%2C%20Sweden-2ea043?style=for-the-badge">
+<img alt="Open to AI Platform, MLOps and Cloud Architecture roles" src="https://img.shields.io/badge/Open%20to-AI%20Platform%20·%20MLOps%20·%20Cloud%20Architecture-8250df?style=for-the-badge">
+
+<br><br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/impact-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/impact-light.svg">
+  <img alt="15+ years in IT; 10 years DevOps and cloud; 10 tested project repos; 10 Terraform stacks tested; 127 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
+</picture>
 
 </div>
 
@@ -24,129 +33,22 @@
 
 ## About
 
-DevOps, Cloud and Platform Engineering professional with **15+ years in IT**, including **~10 years in DevOps architecture** across automotive, manufacturing software and gaming — in Sweden, Belgium, France, Germany and India.
+I design and build the platforms engineers ship on — **multi-account AWS and Azure foundations, Kubernetes with GitOps, large-scale CI/CD** (cloud, embedded and hardware-in-the-loop at Scania), and increasingly **GPU and AI infrastructure**. 15+ years in IT, ~10 in DevOps architecture, across Sweden, Belgium, France, Germany and India.
 
-I design and build the platforms engineers ship on: **multi-account AWS environments**, **Kubernetes platforms with GitOps**, **reusable Terraform patterns**, and **large-scale CI/CD** for cloud, embedded and hardware-in-the-loop workloads. I contribute to architecture strategy through **ADRs, architecture workshops, PoCs and technology evaluations**, and take selected solutions from PoC through production adoption.
-
-**Current focus:** AI-driven DevOps and AIOps — agentic approaches to CI log and alert analysis, failure classification and automated L1 triage — alongside MLOps and AI platform engineering.
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-**What I work on**
-- CI/CD and developer platform architecture
-- Cloud infrastructure, networking and IAM on AWS
-- Kubernetes, Helm and GitOps with Argo CD
-- HIL/SIL test pipelines for embedded systems
-- DevSecOps, identity and secure platform access
-- Reliability, observability and FinOps
-
-</td>
-<td width="50%" valign="top">
-
-**Open to**
-- AI Platform Engineering
-- MLOps / ML Infrastructure
-- DevOps & Cloud Architecture
-- Platform Engineering
-
-</td>
-</tr>
-</table>
-
-## Experience
-
-| Period | Role | Organisation | Highlights |
-|---|---|---|---|
-| 2024 – present | DevOps Engineer, Driver System Software Factory | **Scania Group** (TRATON) | GitLab CI/CD and developer-platform architecture across cloud, Android, QNX, embedded and VM environments; automated HIL/SIL pipelines (build → deploy → flash → validate); targeted CI workflows improved by ~40–50%; standardised DevContainers |
-| 2023 – 2024 | Infrastructure Specialist | **Play'n GO** | AWS infrastructure with Terraform; networking, connectivity and SSL/TLS certificate lifecycle; Bitbucket delivery workflows |
-| 2022 – 2023 | Cloud Engineer (consultant) | **ECARX Europe / Volvo Cars** via Explipro | AWS with Terraform (networking, IAM, compute, Kubernetes); GitOps with Argo CD; Helm charts; CI/CD traceability; GitLab/JFrog upgrades via GitOps; OAuth 2.0, MFA, Microsoft Entra ID; DevSecOps |
-| 2017 – 2022 | Senior Product Development Engineer | **Hexagon Manufacturing Intelligence** | Enterprise CI/CD for multiple desktop and web products; led Perforce → GitLab migration |
-| 2021 – 2022 | DevOps Engineer (remote) | **Roller Gaming UK** | AWS infrastructure automation with Terraform |
-| 2012 – 2017 | Engineer → Senior Engineer | ALTEN · AMM Enterprise · Cyient · AXISCADES | GitLab CI/Jenkins pipelines, Azure deployments, Terraform, PostgreSQL data pipelines, automation |
-
-<sub>Full history on <a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/">LinkedIn</a>.</sub>
-
-## Technical expertise
-
-> **Production** = used in the professional roles above. **Projects** = demonstrated in the public repositories below. **Exploring** = currently learning.
-
-<table>
-<tr><th align="left" width="18%">Area</th><th align="left">Production</th><th align="left" width="26%">Projects</th><th align="left" width="16%">Exploring</th></tr>
-<tr>
-<td><b>Cloud platforms</b></td>
-<td>AWS (multi-account, VPC & networking, IAM, compute, storage) · Microsoft Azure · Microsoft Entra ID · Cloud networking · SSL/TLS</td>
-<td>Multi-AZ VPC design · WireGuard VPN · SSM-only access</td>
-<td>Google Cloud · Hybrid cloud</td>
-</tr>
-<tr>
-<td><b>DevOps & platform</b></td>
-<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Bash · Python · Linux</td>
-<td>Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
-<td>Internal developer platforms</td>
-</tr>
-<tr>
-<td><b>Observability & reliability</b></td>
-<td>SRE practices · Monitoring & alerting · ELK stack · Prometheus</td>
-<td>Elastic Stack 9 · Prometheus metrics in services</td>
-<td>Grafana · Loki · OpenTelemetry</td>
-</tr>
-<tr>
-<td><b>Security</b></td>
-<td>DevSecOps · IAM · OAuth 2.0 · MFA · Access control in CI/CD</td>
-<td>Sigstore keyless signing · SBOM attestation · Kyverno (CEL) admission · Trivy · Semgrep · gitleaks</td>
-<td>SLSA provenance</td>
-</tr>
-<tr>
-<td><b>Architecture</b></td>
-<td>CI/CD design · Build & release systems · Infrastructure architecture · ADRs, PoCs & technology evaluation · Cloud migration & legacy modernisation</td>
-<td>Threat modelling (STRIDE) · signature-gated promotion</td>
-<td>Bazel · Large-scale distributed systems</td>
-</tr>
-<tr>
-<td><b>MLOps & AI infrastructure</b></td>
-<td>AI-assisted CI log / failure triage (AIOps)</td>
-<td>MLflow · DVC · FastAPI model serving · Helm · PyTorch DDP · NVIDIA GPU Operator · Slurm · Kueue · Claude API agents (tool use, RAG, evals)</td>
-<td>Model / drift monitoring · LLM observability</td>
-</tr>
-</table>
+I work from architecture to production: ADRs, workshops, PoCs and technology evaluations, then hands-on delivery. My public repositories are built the same way — **every claim below is backed by code with passing CI**.
 
 <div align="center">
 <br>
+
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=dark&perline=8">
-  <img alt="AWS, Azure, Terraform, Kubernetes, Docker, Ansible, GitLab, GitHub Actions, Jenkins, Linux, Bash, Python, Prometheus, Elasticsearch, PostgreSQL, Nginx" src="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=light&perline=8">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/capabilities-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/capabilities-light.svg">
+  <img alt="Capability map: Cloud foundation, Secure delivery, AI infrastructure, MLOps and agentic AI" src="./assets/capabilities-dark.svg" width="100%">
 </picture>
-<br><br>
-<img alt="Helm" src="https://img.shields.io/badge/Helm-0F1689?style=flat-square&logo=helm&logoColor=white">
-<img alt="Argo CD" src="https://img.shields.io/badge/Argo%20CD-EF7B4D?style=flat-square&logo=argo&logoColor=white">
-<img alt="JFrog Artifactory" src="https://img.shields.io/badge/JFrog-40BE46?style=flat-square&logo=jfrog&logoColor=white">
-<img alt="Microsoft Entra ID" src="https://img.shields.io/badge/Entra%20ID-0078D4?style=flat-square&logo=microsoft&logoColor=white">
-<img alt="Bitbucket" src="https://img.shields.io/badge/Bitbucket-0052CC?style=flat-square&logo=bitbucket&logoColor=white">
+
 </div>
 
-## How I typically build platforms
-
-A generalised view of the delivery platforms I have designed — not a specific employer's system.
-
-```mermaid
-flowchart LR
-  dev([Developer]) -->|push / MR| scm[GitLab]
-  subgraph ci[CI pipeline]
-    direction TB
-    build[Build in DevContainer] --> test[Unit / integration / HIL-SIL tests] --> scan[Security & licence scans] --> pub[Publish artifact]
-  end
-  scm --> ci
-  pub --> art[(JFrog Artifactory)]
-  pub -->|bump version| gitops[GitOps config repo]
-  gitops --> argo[Argo CD]
-  argo -->|Helm| k8s[Kubernetes on AWS]
-  tf[Terraform modules] -->|VPC · IAM · EKS| k8s
-  k8s --> obs[Metrics · logs · alerts]
-  obs -->|CI & alert analysis| ai[AI-assisted triage]
-  ai -.->|recommendations| dev
-```
+**Current focus:** AI-driven DevOps (agentic CI-failure triage, alert analysis), AI platform engineering and MLOps.
 
 ## Featured projects
 
@@ -154,7 +56,7 @@ flowchart LR
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td colspan="2" valign="top">
 
 ### [cloud-solution-architectures](https://github.com/santoshmyakala/cloud-solution-architectures)
 **AWS and Azure side by side**: landing-zone guardrails (SCPs / Azure Policy), hub-and-spoke inspection networking (Transit Gateway + Network Firewall / Azure Firewall Premium), serverless event-driven intake, Kubernetes platform and multi-region DR — with ADRs and Well-Architected mapping.
@@ -186,7 +88,6 @@ Secured **Elastic Stack 9**: auth on, least-privilege Logstash writer, Kibana on
 <sub>Deployed for real in CI · idempotent (changed=0) · end-to-end verify playbook</sub>
 
 </td>
-<td width="50%" valign="top"></td>
 </tr>
 </table>
 
@@ -194,7 +95,7 @@ Secured **Elastic Stack 9**: auth on, least-privilege Logstash writer, Kibana on
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td colspan="2" valign="top">
 
 ### [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline)
 Central **reusable secure-delivery workflow** (gitleaks → Semgrep → Trivy → SBOM → image gate → keyless Sigstore signing), signature-gated GitOps promotion, Argo CD, and **Kyverno 1.20** policies admitting only pipeline-signed images.
@@ -280,13 +181,139 @@ Wave-farm power from 16-buoy layouts at four sites: **gradient boosting vs MLP v
 <sub>Test accuracy 84.1% → 90.6% → 93.5%</sub>
 
 </td>
-<td width="50%" valign="top"></td>
 </tr>
 </table>
 
+### Live build status
+
+Proof, not claims — every featured repository is tested on every push:
+
+| Repository | CI |
+|---|---|
+| [cloud-solution-architectures](https://github.com/santoshmyakala/cloud-solution-architectures) | [![ci](https://github.com/santoshmyakala/cloud-solution-architectures/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/cloud-solution-architectures/actions/workflows/ci.yml) |
+| [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline) | [![ci](https://github.com/santoshmyakala/devsecops-gitops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/devsecops-gitops-pipeline/actions/workflows/ci.yml) |
+| [devsecops-reference-architectures](https://github.com/santoshmyakala/devsecops-reference-architectures) | [![ci](https://github.com/santoshmyakala/devsecops-reference-architectures/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/devsecops-reference-architectures/actions/workflows/ci.yml) |
+| [ai-infrastructure-hpc-gpu](https://github.com/santoshmyakala/ai-infrastructure-hpc-gpu) | [![ci](https://github.com/santoshmyakala/ai-infrastructure-hpc-gpu/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ai-infrastructure-hpc-gpu/actions/workflows/ci.yml) |
+| [agentic-genai-platform](https://github.com/santoshmyakala/agentic-genai-platform) | [![ci](https://github.com/santoshmyakala/agentic-genai-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/agentic-genai-platform/actions/workflows/ci.yml) |
+| [wine-quality-mlops](https://github.com/santoshmyakala/wine-quality-mlops) | [![ci](https://github.com/santoshmyakala/wine-quality-mlops/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/wine-quality-mlops/actions/workflows/ci.yml) |
+| [aws-three-tier-platform](https://github.com/santoshmyakala/aws-three-tier-platform) | [![terraform](https://github.com/santoshmyakala/aws-three-tier-platform/actions/workflows/terraform.yml/badge.svg)](https://github.com/santoshmyakala/aws-three-tier-platform/actions/workflows/terraform.yml) |
+| [ansible-elk-stack](https://github.com/santoshmyakala/ansible-elk-stack) | [![ci](https://github.com/santoshmyakala/ansible-elk-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ansible-elk-stack/actions/workflows/ci.yml) |
+| [wave-energy-farm-ml](https://github.com/santoshmyakala/wave-energy-farm-ml) | [![ci](https://github.com/santoshmyakala/wave-energy-farm-ml/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/wave-energy-farm-ml/actions/workflows/ci.yml) |
+| [fashion-mnist-neural-networks](https://github.com/santoshmyakala/fashion-mnist-neural-networks) | [![ci](https://github.com/santoshmyakala/fashion-mnist-neural-networks/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/fashion-mnist-neural-networks/actions/workflows/ci.yml) |
+
 <sub>Every project ships with CI, tests, results from real runs, SHA-pinned actions, secret scanning and Dependabot. Data sources are cited with their licences. The ML projects began as coursework from my PG Diploma in Machine Learning and were rebuilt as production-style reference implementations.</sub>
 
+## Experience
+
+**Scania (TRATON)** · **Play'n GO** · **ECARX / Volvo Cars** · **Hexagon** · Roller Gaming · ALTEN · Cyient
+
+<details>
+<summary><b>Show roles and highlights</b></summary>
+
+| Period | Role | Organisation | Highlights |
+|---|---|---|---|
+| 2024 – present | DevOps Engineer, Driver System Software Factory | **Scania Group** (TRATON) | GitLab CI/CD and developer-platform architecture across cloud, Android, QNX, embedded and VM environments; automated HIL/SIL pipelines (build → deploy → flash → validate); targeted CI workflows improved by ~40–50%; standardised DevContainers |
+| 2023 – 2024 | Infrastructure Specialist | **Play'n GO** | AWS infrastructure with Terraform; networking, connectivity and SSL/TLS certificate lifecycle; Bitbucket delivery workflows |
+| 2022 – 2023 | Cloud Engineer (consultant) | **ECARX Europe / Volvo Cars** via Explipro | AWS with Terraform (networking, IAM, compute, Kubernetes); GitOps with Argo CD; Helm charts; CI/CD traceability; GitLab/JFrog upgrades via GitOps; OAuth 2.0, MFA, Microsoft Entra ID; DevSecOps |
+| 2017 – 2022 | Senior Product Development Engineer | **Hexagon Manufacturing Intelligence** | Enterprise CI/CD for multiple desktop and web products; led Perforce → GitLab migration |
+| 2021 – 2022 | DevOps Engineer (remote) | **Roller Gaming UK** | AWS infrastructure automation with Terraform |
+| 2012 – 2017 | Engineer → Senior Engineer | ALTEN · AMM Enterprise · Cyient · AXISCADES | GitLab CI/Jenkins pipelines, Azure deployments, Terraform, PostgreSQL data pipelines, automation |
+
+</details>
+
+<sub>Full history on <a href="https://www.linkedin.com/in/santoshkumar-myakala-b3456021/">LinkedIn</a>.</sub>
+
+## Technical expertise
+
+<details>
+<summary><b>Show the full skills matrix (Production · Projects · Exploring)</b></summary>
+
+> **Production** = used in the professional roles above. **Projects** = demonstrated in the public repositories below. **Exploring** = currently learning.
+
+<table>
+<tr><th align="left" width="18%">Area</th><th align="left">Production</th><th align="left" width="26%">Projects</th><th align="left" width="16%">Exploring</th></tr>
+<tr>
+<td><b>Cloud platforms</b></td>
+<td>AWS (multi-account, VPC & networking, IAM, compute, storage) · Microsoft Azure · Microsoft Entra ID · Cloud networking · SSL/TLS</td>
+<td>Multi-AZ VPC design · WireGuard VPN · SSM-only access</td>
+<td>Google Cloud · Hybrid cloud</td>
+</tr>
+<tr>
+<td><b>DevOps & platform</b></td>
+<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Bash · Python · Linux</td>
+<td>Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
+<td>Internal developer platforms</td>
+</tr>
+<tr>
+<td><b>Observability & reliability</b></td>
+<td>SRE practices · Monitoring & alerting · ELK stack · Prometheus</td>
+<td>Elastic Stack 9 · Prometheus metrics in services</td>
+<td>Grafana · Loki · OpenTelemetry</td>
+</tr>
+<tr>
+<td><b>Security</b></td>
+<td>DevSecOps · IAM · OAuth 2.0 · MFA · Access control in CI/CD</td>
+<td>Sigstore keyless signing · SBOM attestation · Kyverno (CEL) admission · Trivy · Semgrep · gitleaks</td>
+<td>SLSA provenance</td>
+</tr>
+<tr>
+<td><b>Architecture</b></td>
+<td>CI/CD design · Build & release systems · Infrastructure architecture · ADRs, PoCs & technology evaluation · Cloud migration & legacy modernisation</td>
+<td>Threat modelling (STRIDE) · signature-gated promotion</td>
+<td>Bazel · Large-scale distributed systems</td>
+</tr>
+<tr>
+<td><b>MLOps & AI infrastructure</b></td>
+<td>AI-assisted CI log / failure triage (AIOps)</td>
+<td>MLflow · DVC · FastAPI model serving · Helm · PyTorch DDP · NVIDIA GPU Operator · Slurm · Kueue · Claude API agents (tool use, RAG, evals)</td>
+<td>Model / drift monitoring · LLM observability</td>
+</tr>
+</table>
+
+</details>
+
+<div align="center">
+<br>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=dark&perline=8">
+  <img alt="AWS, Azure, Terraform, Kubernetes, Docker, Ansible, GitLab, GitHub Actions, Jenkins, Linux, Bash, Python, Prometheus, Elasticsearch, PostgreSQL, Nginx" src="https://skillicons.dev/icons?i=aws,azure,terraform,kubernetes,docker,ansible,gitlab,githubactions,jenkins,linux,bash,python,prometheus,elasticsearch,postgres,nginx&theme=light&perline=8">
+</picture>
+<br><br>
+<img alt="Helm" src="https://img.shields.io/badge/Helm-0F1689?style=flat-square&logo=helm&logoColor=white">
+<img alt="Argo CD" src="https://img.shields.io/badge/Argo%20CD-EF7B4D?style=flat-square&logo=argo&logoColor=white">
+<img alt="JFrog Artifactory" src="https://img.shields.io/badge/JFrog-40BE46?style=flat-square&logo=jfrog&logoColor=white">
+<img alt="Microsoft Entra ID" src="https://img.shields.io/badge/Entra%20ID-0078D4?style=flat-square&logo=microsoft&logoColor=white">
+<img alt="Bitbucket" src="https://img.shields.io/badge/Bitbucket-0052CC?style=flat-square&logo=bitbucket&logoColor=white">
+</div>
+
+## How I typically build platforms
+
+A generalised view of the delivery platforms I have designed — not a specific employer's system.
+
+```mermaid
+flowchart LR
+  dev([Developer]) -->|push / MR| scm[GitLab]
+  subgraph ci[CI pipeline]
+    direction TB
+    build[Build in DevContainer] --> test[Unit / integration / HIL-SIL tests] --> scan[Security & licence scans] --> pub[Publish artifact]
+  end
+  scm --> ci
+  pub --> art[(JFrog Artifactory)]
+  pub -->|bump version| gitops[GitOps config repo]
+  gitops --> argo[Argo CD]
+  argo -->|Helm| k8s[Kubernetes on AWS]
+  tf[Terraform modules] -->|VPC · IAM · EKS| k8s
+  k8s --> obs[Metrics · logs · alerts]
+  obs -->|CI & alert analysis| ai[AI-assisted triage]
+  ai -.->|recommendations| dev
+```
+
 ## Certifications & education
+
+Software Architecture of Large-Scale Systems · Cloud Security Lead & Cloud Leader AWS (Scania) · AWS VPC & Networking · Google SRE Culture · IIT Roorkee Big Data Engineering · IBM Big Data & ML
+
+<details>
+<summary><b>Show all certifications and education</b></summary>
 
 <table>
 <tr><td valign="top" width="50%">
@@ -316,9 +343,17 @@ Wave-farm power from 16-buoy layouts at four sites: **gradient boosting vs MLP v
 </td></tr>
 </table>
 
+</details>
+
 ## GitHub activity
 
 <div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/snake.svg">
+  <img alt="Contribution graph animation" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/snake.svg" width="100%">
+</picture>
+<br>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=santoshmyakala&show_icons=true&hide_border=true&theme=github_dark">
   <img height="165" alt="GitHub statistics for santoshmyakala" src="https://github-readme-stats.vercel.app/api?username=santoshmyakala&show_icons=true&hide_border=true&theme=default">
