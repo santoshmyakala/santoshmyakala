@@ -82,6 +82,59 @@ def level(n: int, peak: int) -> int:
     return min(4, 1 + int(3 * n / max(peak, 1)))
 
 
+def snake(cells: list, cell: int, t: dict) -> list[str]:
+    """A snake that eats every contribution day in date order, oldest (2019…) to today, then loops."""
+    peak = max([c[3] for c in cells] + [1])
+    food = sorted((c for c in cells if c[3] > 0), key=lambda c: c[0])
+    h = cell / 2
+    pts, eat = [], {}
+    if food:
+        first = food[0]
+        pts.append((first[1] - 40 + h, first[2] + h))
+    for date, x, y, _ in food:
+        px, py = pts[-1]
+        if py != y + h:
+            pts.append((x + h, py))  # horizontal, then vertical (grid-like moves)
+        pts.append((x + h, y + h))
+    length, seg = 0.0, []
+    for a, b in zip(pts, pts[1:]):
+        d = abs(b[0] - a[0]) + abs(b[1] - a[1])
+        seg.append(d)
+        length += d
+    dur = min(max(length / 260, 12), 90) + 3  # +3 s: eaten board stays visible, then everything comes back
+    move = dur - 3
+    path = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) if len(pts) > 1 else ""
+    # arrival time at every food cell
+    at, travelled, i = {}, 0.0, 0
+    for k, p in enumerate(pts[1:], start=1):
+        travelled += seg[k - 1]
+        if i < len(food) and (food[i][1] + h, food[i][2] + h) == p:
+            at[food[i][0]] = travelled / length * move if length else 0
+            i += 1
+    out = []
+    empty = t["levels"][0]
+    for date, x, y, n in cells:
+        fill = t["levels"][level(n, peak)]
+        anim = ""
+        if date in at:
+            k = at[date] / dur
+            anim = (f'<animate attributeName="fill" dur="{dur:.2f}s" repeatCount="indefinite" calcMode="discrete" '
+                    f'values="{fill};{empty};{fill}" keyTimes="0;{k:.4f};0.9999"/>')
+        out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.5" fill="{fill}">'
+                   f'<title>{date}: {n}</title>{anim}</rect>')
+    if path:
+        out.append(f'<path id="snake-path" d="{path}" fill="none" stroke="none"/>')
+        for k in range(6):  # head first, body segments trail behind
+            size = cell + 1 - k * 0.9
+            lag = k * (cell + 3) / 260
+            out.append(f'<rect class="snake" x="{-size / 2:.1f}" y="{-size / 2:.1f}" width="{size:.1f}" height="{size:.1f}" rx="3" '
+                       f'fill="{t["accent"]}" opacity="{1 - k * 0.12:.2f}">'
+                       f'<animateMotion dur="{dur:.2f}s" repeatCount="indefinite" calcMode="linear" '
+                       f'keyPoints="0;0;1;1" keyTimes="0;{min(lag / dur, 0.01):.4f};{(move + lag) / dur:.4f};1">'
+                       f'<mpath href="#snake-path"/></animateMotion></rect>')
+    return out
+
+
 def render(data: dict, theme: str) -> str:
     t = THEMES[theme]
     cell, gap, label_w, total_w = 10, 3, 52, 70
@@ -109,6 +162,7 @@ def render(data: dict, theme: str) -> str:
     for m, name in enumerate(months):
         wk = (dt.date(2001, m + 1, 1) - dt.date(2001, 1, 1)).days // 7
         out.append(f'<text x="{24 + label_w + wk * (cell + gap):.1f}" y="{y0 - 8}" class="m">{name}</text>')
+    cells = []
     for r, y in enumerate(years):
         yy = y0 + r * row_h
         out.append(f'<text x="24" y="{yy + 3.5 * (cell + gap) + 4:.1f}" class="yr">{y["year"]}</text>')
@@ -122,9 +176,8 @@ def render(data: dict, theme: str) -> str:
             idx = (d - jan1).days + offset
             x = 24 + label_w + (idx // 7) * (cell + gap)
             cy = yy + (idx % 7) * (cell + gap)
-            delay = (r * 53 + idx // 7) * 0.004
-            out.append(f'<rect x="{x}" y="{cy}" width="{cell}" height="{cell}" rx="2.5" fill="{t["levels"][level(n, peak)]}" '
-                       f'class="c" style="animation-delay:{delay:.3f}s"><title>{date}: {n}</title></rect>')
+            cells.append((date, x, cy, n))
+    out.extend(snake(cells, cell, t))
     height = y0 + len(years) * row_h + 34
     legend_x = width - 24 - 5 * (cell + 3) - 70
     legend = (f'<text x="{legend_x - 6}" y="{height - 16}" class="lg" text-anchor="end">Less</text>'
@@ -144,11 +197,11 @@ def render(data: dict, theme: str) -> str:
 .c{{animation:pop .5s ease-out both}} .f{{animation:fade .6s ease-out both}}
 @keyframes pop{{from{{opacity:0;transform:scale(.4)}}to{{opacity:1;transform:scale(1)}}}} .c{{transform-box:fill-box;transform-origin:center}}
 @keyframes fade{{from{{opacity:0}}to{{opacity:1}}}}
-@media (prefers-reduced-motion:reduce){{.c,.f{{animation:none}}}}
+@media (prefers-reduced-motion:reduce){{.f{{animation:none}}.snake{{display:none}}}}
 </style>
 <rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="16" fill="{t['panel']}" stroke="{t['border']}"/>
 <text x="24" y="38" class="tt">{title}</text>
-<text x="24" y="60" class="st">Every year since joining GitHub, most recent first</text>
+<text x="24" y="60" class="st">Every year since joining GitHub, most recent first · the snake eats every contribution day, oldest to newest</text>
 {''.join(out)}
 {legend}
 {note}
