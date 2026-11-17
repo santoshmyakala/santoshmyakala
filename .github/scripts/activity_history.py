@@ -17,11 +17,11 @@ from pathlib import Path
 
 API = "https://api.github.com/graphql"
 FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif"
-THEMES = {
-    "dark": dict(bg="#0d1117", panel="#11161f", border="#30363d", text="#e6edf3", muted="#9da7b3", accent="#58a6ff", head="#a5d6ff",
-                 levels=["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]),
-    "light": dict(bg="#ffffff", panel="#f8fafc", border="#d0d7de", text="#1f2328", muted="#57606a", accent="#0969da", head="#033d8b",
-                  levels=["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"]),
+THEMES = {  # GitLab-style indigo activity scale; the snake is GitLab orange
+    "dark": dict(bg="#1f1e24", panel="#18171d", border="#3a383f", text="#ececef", muted="#bfbfc3", accent="#9aa8f7",
+                 snake="#fc6d26", head="#ffc2a1", levels=["#28272d", "#2f2a6b", "#5565d8", "#7d8ff0", "#d2dcff"]),
+    "light": dict(bg="#fbfafd", panel="#ffffff", border="#dcdcde", text="#28272d", muted="#626168", accent="#4b4ba3",
+                  snake="#e24329", head="#8a2a0f", levels=["#ececef", "#d2dcff", "#97acff", "#5565d8", "#2f2a6b"]),
 }
 
 YEAR_QUERY = """query($login:String!,$from:DateTime!,$to:DateTime!){user(login:$login){
@@ -122,7 +122,7 @@ def snake(cells: list, cell: int, gap: int, t: dict) -> list[str]:
             k = at[d] / dur
             anim = (f'<animate attributeName="fill" dur="{dur:.2f}s" repeatCount="indefinite" calcMode="discrete" '
                     f'values="{fill};{empty};{fill}" keyTimes="0;{k:.4f};{(dur - 0.6) / dur:.4f}"/>')
-        out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2" fill="{fill}"><title>{d}: {n}</title>{anim}</rect>')
+        out.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="3" fill="{fill}"><title>{d}: {n}</title>{anim}</rect>')
     path = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
     out.append(f'<path id="snake-path" d="{path}" fill="none"/>')
     eat_times = sorted(at.values())
@@ -130,7 +130,7 @@ def snake(cells: list, cell: int, gap: int, t: dict) -> list[str]:
     for k in reversed(range(segments)):
         lag = k * step * 0.95 / speed
         size = cell + 2 if k == 0 else cell - min(k, 6) * 0.35
-        colour = t["head"] if k == 0 else t["accent"]
+        colour = t["head"] if k == 0 else t["snake"]
         op = 1 - k * 0.045
         appear = ""
         if k >= base:
@@ -152,13 +152,13 @@ def render(data: dict, theme: str) -> str:
     days = {d: n for y in data["years"] for d, n in y["days"].items()}
     first = dt.date.fromisoformat(data["created"])
     last = dt.date.fromisoformat(data["today"])
-    start = first - dt.timedelta(days=(first.weekday() + 1) % 7)  # Sunday on/before the first day
+    start = first - dt.timedelta(days=first.weekday())  # Monday on/before the first day (GitLab rows start on Monday)
     weeks = (last - start).days // 7 + 1
-    cell, gap = 10, 3
+    cell, gap, lw = 12, 3, 34
     step = cell + gap
-    per_line = 68                                                    # ≈ 16 months per line
+    per_line = 56                                                    # ≈ 13 months per strip, like GitLab
     lines = -(-weeks // per_line)
-    width = 24 + per_line * step + 24
+    width = 24 + lw + per_line * step + 24
     longest, current = streaks(data["years"])
     since = first.strftime("%b %Y")
     tot = data["totals"]
@@ -174,14 +174,14 @@ def render(data: dict, theme: str) -> str:
                    f'<text x="{x + tw / 2:.1f}" y="{top + 46}" class="l">{label}</text></g>')
 
     # continuous calendar: one column per week from the first day to today, wrapped into lines
-    y0, line_h = top + 58 + 40, 7 * step + 30
+    y0, line_h = top + 58 + 44, 7 * step + 34
     cells = []
     d = first
     while d <= last:
         w = (d - start).days // 7
         line, col = divmod(w, per_line)
-        x = 24 + col * step
-        y = y0 + line * line_h + ((d.weekday() + 1) % 7) * step
+        x = 24 + lw + col * step
+        y = y0 + line * line_h + d.weekday() * step
         cells.append((d.isoformat(), x, y, days.get(d.isoformat(), 0)))
         d += dt.timedelta(days=1)
     for line in range(lines):  # month labels on every line; the year is shown on January (and on the very first month)
@@ -192,7 +192,7 @@ def render(data: dict, theme: str) -> str:
                 if day.day == 1 and first <= day <= last:
                     yearly = day.month == 1 or not (labels or line)
                     text = f"{MONTHS[day.month - 1]} {day.year}" if yearly else MONTHS[day.month - 1]
-                    labels.append([24 + (w - line * per_line) * step, text, yearly])
+                    labels.append([24 + lw + (w - line * per_line) * step, text, yearly])
         kept = []
         for lab in labels:  # drop a plain month label that would collide with its neighbour
             if kept and lab[0] < kept[-1][0] + len(kept[-1][1]) * 6.2 + 6:
@@ -200,8 +200,11 @@ def render(data: dict, theme: str) -> str:
                     kept[-1] = lab
                 continue
             kept.append(lab)
+        kept = [lab for lab in kept if lab[0] + len(lab[1]) * 7 < width - 16]
         for x, text, yearly in kept:
-            out.append(f'<text x="{x}" y="{y0 + line * line_h - 7}" class="{"my" if yearly else "m"}">{text}</text>')
+            out.append(f'<text x="{x}" y="{y0 + line * line_h - 8}" class="{"my" if yearly else "m"}">{text}</text>')
+        for row, wd in ((0, "M"), (2, "W"), (4, "F"), (6, "S")):
+            out.append(f'<text x="{24 + lw - 12}" y="{y0 + line * line_h + row * step + cell - 1.5}" class="wd">{wd}</text>')
     out.extend(snake(cells, cell, gap, t))
     grid_bottom = y0 + lines * line_h - 22
 
@@ -225,26 +228,24 @@ def render(data: dict, theme: str) -> str:
                        f'<text x="{x + 2:.1f}" y="{bar_top + bar_h + 19}" class="m">{m.year}</text>')
     out.append(f'<line x1="24" y1="{bar_top + bar_h + 0.5}" x2="{width - 24}" y2="{bar_top + bar_h + 0.5}" stroke="{t["border"]}"/>')
     height = bar_top + bar_h + 58
-    legend_x = width - 24 - 5 * (cell + 3) - 34
-    legend = (f'<text x="{legend_x - 6}" y="{height - 16}" class="lg" text-anchor="end">Less</text>'
-              + "".join(f'<rect x="{legend_x + i * (cell + 3)}" y="{height - 25}" width="{cell}" height="{cell}" rx="2" fill="{c}"/>'
-                        for i, c in enumerate(t["levels"]))
-              + f'<text x="{legend_x + 5 * (cell + 3) + 4}" y="{height - 16}" class="lg">More</text>')
-    note = (f'<text x="24" y="{height - 16}" class="lg">Public contributions · current streak {current} days · updated {data["today"]}</text>')
-    title = f"Contribution history · {since} – today"
+    legend = "".join(f'<rect x="{24 + i * (cell + 4)}" y="{height - 30}" width="{cell}" height="{cell}" rx="3" fill="{c}"/>'
+                     for i, c in enumerate(t["levels"]))
+    note = (f'<text x="{width - 24}" y="{height - 19.5}" class="lg" text-anchor="end">Commits, pull requests, issues and reviews '
+            f'(public) · current streak {current} days · updated {data["today"]}</text>')
+    title = f"Activity · {since} – today"
     return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{title}: {tot['contributions']:,} contributions">
 <title>{title}</title>
 <style>
 .tt{{font:700 18px {FONT};fill:{t['text']}}} .st{{font:400 12.5px {FONT};fill:{t['muted']}}} .sec{{font:600 12.5px {FONT};fill:{t['text']}}}
 .v{{font:700 20px {FONT};fill:{t['accent']};text-anchor:middle}} .l{{font:400 11.5px {FONT};fill:{t['muted']};text-anchor:middle}}
-.m{{font:400 10.5px {FONT};fill:{t['muted']}}} .my{{font:700 10.5px {FONT};fill:{t['text']}}} .lg{{font:400 11px {FONT};fill:{t['muted']}}}
+.m{{font:400 12px {FONT};fill:{t['muted']}}} .wd{{font:400 12px {FONT};fill:{t['muted']};text-anchor:end}} .my{{font:700 12px {FONT};fill:{t['text']}}} .lg{{font:400 11px {FONT};fill:{t['muted']}}}
 .f{{animation:fade .6s ease-out both}} .b{{transform-box:fill-box;transform-origin:bottom;animation:grow .8s ease-out both}}
 @keyframes fade{{from{{opacity:0}}to{{opacity:1}}}} @keyframes grow{{from{{transform:scaleY(0)}}to{{transform:scaleY(1)}}}}
 @media (prefers-reduced-motion:reduce){{.f,.b{{animation:none}}.snake{{display:none}}}}
 </style>
 <rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="16" fill="{t['panel']}" stroke="{t['border']}"/>
 <text x="24" y="38" class="tt">{title}</text>
-<text x="24" y="60" class="st">One continuous calendar from the first day on GitHub to today · the snake eats every contribution day, oldest first, and grows as it goes</text>
+<text x="24" y="60" class="st">Full history since joining GitHub · the snake eats every contribution day, oldest first, and grows as it goes</text>
 {''.join(out)}
 {legend}
 {note}
