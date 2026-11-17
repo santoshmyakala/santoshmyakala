@@ -341,14 +341,13 @@ Software Architecture of Large-Scale Systems · Cloud Security Lead & Cloud Lead
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/snake.svg">
-  <img alt="Contribution graph animation" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/snake.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/activity-dark.svg">
+  <img alt="All-time GitHub contribution history: one heatmap row per year since the account was created, with lifetime totals" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/activity-light.svg" width="100%">
 </picture>
 <br>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=santoshmyakala&show_icons=true&hide_border=true&theme=github_dark">
-  <img height="165" alt="GitHub statistics for santoshmyakala" src="https://github-readme-stats.vercel.app/api?username=santoshmyakala&show_icons=true&hide_border=true&theme=default">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=santoshmyakala&include_all_commits=true&show_icons=true&hide_border=true&theme=github_dark">
+  <img height="165" alt="GitHub statistics for santoshmyakala" src="https://github-readme-stats.vercel.app/api?username=santoshmyakala&include_all_commits=true&show_icons=true&hide_border=true&theme=default">
 </picture>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=santoshmyakala&hide_border=true&theme=github-dark-blue">
