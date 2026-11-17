@@ -136,7 +136,8 @@ STACK = [  # (category, [(icon file, label)]) — only technologies used in role
     ("Languages", [("python", "Python"), ("bash", "Bash"), ("c", "C"), ("cplusplus", "C++"), ("java", "Java"),
                    ("groovy", "Groovy"), ("javascript", "JavaScript"), ("go", "Go"), ("rust", "Rust")]),
     ("Python data stack", [("pandas", "pandas"), ("numpy", "NumPy"), ("matplotlib", "Matplotlib"), ("jupyter", "Jupyter")]),
-    ("Data engineering", [("hadoop", "Hadoop"), ("hive", "Hive"), ("apachespark", "Spark")]),
+    ("Data engineering", [("hadoop", "Hadoop"), ("hive", "Hive"), ("apachespark", "Spark"), ("kafka", "Kafka"),
+                          ("airflow", "Airflow"), ("nifi", "NiFi"), ("databricks", "Databricks")]),
     ("Databases & servers", [("postgresql", "PostgreSQL"), ("mysql", "MySQL"), ("mongodb", "MongoDB"), ("redis", "Redis"),
                              ("dynamodb", "DynamoDB"), ("cosmosdb", "Cosmos DB"), ("nginx", "Nginx")]),
 ]

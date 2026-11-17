@@ -56,7 +56,7 @@ I work from architecture to production: ADRs, workshops, PoCs and technology eva
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg">
-  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Operating systems: Linux, Red Hat, SUSE, Ubuntu, Debian, Kali Linux, QNX; Languages: Python, Bash, C, C++, Java, Groovy, JavaScript, Go, Rust; Python data stack: pandas, NumPy, Matplotlib, Jupyter; Data engineering: Hadoop, Hive, Spark; Databases and servers: PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Cosmos DB, Nginx" src="./assets/stack-dark.svg" width="100%">
+  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Operating systems: Linux, Red Hat, SUSE, Ubuntu, Debian, Kali Linux, QNX; Languages: Python, Bash, C, C++, Java, Groovy, JavaScript, Go, Rust; Python data stack: pandas, NumPy, Matplotlib, Jupyter; Data engineering: Hadoop, Hive, Spark, Kafka, Airflow, NiFi, Databricks; Databases and servers: PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Cosmos DB, Nginx" src="./assets/stack-dark.svg" width="100%">
 </picture>
 </div>
 
@@ -275,7 +275,7 @@ Proof, not claims — every featured repository is tested on every push:
 </tr>
 <tr>
 <td><b>Data engineering</b></td>
-<td>Data pipelines · Hadoop · Hive · Spark · PostgreSQL · MySQL · Redis · pandas · NumPy</td>
+<td>Data pipelines · Kafka · Airflow · NiFi · dbt · Databricks · Hadoop · Hive · Spark · PostgreSQL · MySQL · Redis · pandas · NumPy</td>
 <td>DVC data pipelines · DynamoDB / Cosmos DB designs · MongoDB replica set · data-quality audits (pandas)</td>
 <td>—</td>
 </tr>
