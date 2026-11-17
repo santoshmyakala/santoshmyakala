@@ -56,7 +56,7 @@ I work from architecture to production: ADRs, workshops, PoCs and technology eva
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg">
-  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Languages and OS: Python, Bash, Linux, PostgreSQL, Nginx" src="./assets/stack-dark.svg" width="100%">
+  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Operating systems: Linux, Red Hat, SUSE, Ubuntu, Debian, Kali Linux, QNX; Languages and servers: Python, Bash, PostgreSQL, Nginx" src="./assets/stack-dark.svg" width="100%">
 </picture>
 </div>
 
@@ -251,7 +251,7 @@ Proof, not claims — every featured repository is tested on every push:
 </tr>
 <tr>
 <td><b>DevOps & platform</b></td>
-<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Bash · Python · Linux</td>
+<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Bash · Python · Linux (Red Hat, SUSE, Ubuntu, Debian, Kali) · QNX</td>
 <td>Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
 <td>Internal developer platforms</td>
 </tr>

@@ -131,8 +131,9 @@ STACK = [  # (category, [(icon file, label)]) — only technologies used in role
     ("Logging", [("loki", "Loki"), ("elasticsearch", "Elasticsearch"), ("logstash", "Logstash"), ("kibana", "Kibana")]),
     ("AI, GPU & ML", [("nvidia", "NVIDIA"), ("pytorch", "PyTorch"), ("mlflow", "MLflow"), ("dvc", "DVC"),
                       ("scikitlearn", "scikit-learn"), ("fastapi", "FastAPI"), ("claude", "Claude")]),
-    ("Languages & OS", [("python", "Python"), ("bash", "Bash"), ("linux", "Linux"), ("postgresql", "PostgreSQL"),
-                        ("nginx", "Nginx")]),
+    ("Operating systems", [("linux", "Linux"), ("redhat", "Red Hat"), ("suse", "SUSE"), ("ubuntu", "Ubuntu"),
+                           ("debian", "Debian"), ("kali", "Kali Linux"), ("qnx-text", "QNX")]),
+    ("Languages & servers", [("python", "Python"), ("bash", "Bash"), ("postgresql", "PostgreSQL"), ("nginx", "Nginx")]),
 ]
 
 
