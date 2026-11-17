@@ -1,0 +1,37 @@
+title: How I typically build delivery platforms
+subtitle: A generalised view of platforms I have designed — not a specific employer's system
+grid: {dx: 225, dy: 185}
+groups:
+  - {id: ci, label: CI pipeline, sub: GitLab CI / Jenkins, icon: gitlab, color: orange, box: [2, 0, 4, 0]}
+  - {id: aws, label: AWS, sub: EKS, icon: amazonwebservices, color: orange, box: [2, 1, 3, 1]}
+  - {id: obs, label: Observability, icon: opentelemetry, color: teal, box: [1, 2.25, 3, 2.25]}
+nodes:
+  - {id: dev, label: Developer, sub: push / MR, icon: user, at: [0, 0], color: gray}
+  - {id: scm, label: GitLab, sub: merge request, icon: [gitlab, git], at: [1, 0], color: orange}
+  - {id: build, label: Build, sub: DevContainer · Docker, icon: [docker, jenkins], at: [2, 0], color: blue}
+  - {id: test, label: Test, sub: unit · integration · HIL / SIL, icon: check, at: [3, 0], color: blue}
+  - {id: scan, label: Security scans, sub: SAST · SCA · licences, icon: [trivy, shield], at: [4, 0], color: green}
+  - {id: art, label: Artifactory, sub: versioned artefacts, icon: jfrog, at: [5.1, 0], color: green}
+  - {id: gitops, label: GitOps repo, sub: version bump, icon: git, at: [5.1, 1], color: orange}
+  - {id: argo, label: Argo CD, sub: Helm releases, icon: [argocd, helm], at: [4.05, 1], color: orange}
+  - {id: k8s, label: Kubernetes, sub: workloads · HPA, icon: kubernetes, at: [3, 1], color: blue, stack: true, pulse: true}
+  - {id: tf, label: Terraform modules, sub: VPC · IAM · EKS, icon: terraform, at: [2, 1], color: purple}
+  - {id: metrics, label: Metrics + traces, sub: Prometheus · OTel · Datadog, icon: [prometheus, datadog], at: [3, 2.25], color: teal}
+  - {id: logs, label: Logs + dashboards, sub: Loki · Grafana, icon: [loki, grafana], at: [2, 2.25], color: teal}
+  - {id: bi, label: CI reports, sub: Power BI KPIs, icon: powerbi-chart, at: [1, 2.25], color: amber}
+  - {id: ai, label: AI-assisted triage, sub: CI failures · alerts, icon: [claude, agent], at: [0, 1.25], color: purple}
+edges:
+  - {from: dev, to: scm, kind: data}
+  - {from: scm, to: build, kind: data}
+  - {from: build, to: test, kind: data, packet: box}
+  - {from: test, to: scan, kind: data, packet: box}
+  - {from: scan, to: art, label: publish, kind: secure, packet: box}
+  - {from: art, to: gitops, label: bump version, kind: data}
+  - {from: gitops, to: argo, kind: control}
+  - {from: argo, to: k8s, kind: control}
+  - {from: tf, to: k8s, kind: control}
+  - {from: k8s, to: metrics, kind: metrics}
+  - {from: metrics, to: logs, kind: metrics}
+  - {from: logs, to: bi, kind: metrics}
+  - {from: bi, to: ai, label: insights, kind: async, route: hv, at: 0.3}
+  - {from: ai, to: dev, label: recommendations, kind: control}

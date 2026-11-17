@@ -295,23 +295,10 @@ Proof, not claims — every featured repository is tested on every push:
 
 A generalised view of the delivery platforms I have designed — not a specific employer's system.
 
-```mermaid
-flowchart LR
-  dev([Developer]) -->|push / MR| scm[GitLab]
-  subgraph ci[CI pipeline]
-    direction TB
-    build[Build in DevContainer] --> test[Unit / integration / HIL-SIL tests] --> scan[Security & licence scans] --> pub[Publish artifact]
-  end
-  scm --> ci
-  pub --> art[(JFrog Artifactory)]
-  pub -->|bump version| gitops[GitOps config repo]
-  gitops --> argo[Argo CD]
-  argo -->|Helm| k8s[Kubernetes on AWS]
-  tf[Terraform modules] -->|VPC · IAM · EKS| k8s
-  k8s --> obs[Metrics · logs · alerts]
-  obs -->|CI & alert analysis| ai[AI-assisted triage]
-  ai -.->|recommendations| dev
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/diagrams/platform-dark.svg">
+  <img alt="Delivery platform: developer pushes to GitLab; CI builds in a DevContainer, runs unit, integration and HIL/SIL tests and security scans, publishes to Artifactory and bumps a GitOps repo; Argo CD deploys Helm releases to Kubernetes on AWS EKS provisioned with Terraform; Prometheus, OpenTelemetry, Datadog, Loki, Grafana and Power BI CI reports feed AI-assisted triage that sends recommendations back to developers." src="assets/diagrams/platform-light.svg" width="100%">
+</picture>
 
 ## Certifications & education
 
