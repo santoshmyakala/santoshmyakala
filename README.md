@@ -342,7 +342,7 @@ Software Architecture of Large-Scale Systems · Cloud Security Lead & Cloud Lead
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/activity-dark.svg">
-  <img alt="All-time GitHub contribution history: one heatmap row per year since the account was created, with lifetime totals" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/activity-light.svg" width="100%">
+  <img alt="GitLab-style activity calendar covering every day since joining GitHub; a snake eats each contribution day from oldest to newest while the view pans to today" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/activity-light.svg" width="100%">
 </picture>
 <br>
 <picture>

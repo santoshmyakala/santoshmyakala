@@ -93,7 +93,7 @@ def level(n: int, peak: int = 0) -> int:
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
-def snake(cells: list, cell: int, gap: int, t: dict) -> list[str]:
+def snake(cells: list, cell: int, gap: int, t: dict, meta: dict | None = None) -> list[str]:
     """A snake that crawls cell by cell through the whole history, eating every contribution day
     oldest-to-newest and growing as it eats. Pure SMIL, so it animates inside a README <img>."""
     peak = max([c[3] for c in cells] + [1])
@@ -114,9 +114,11 @@ def snake(cells: list, cell: int, gap: int, t: dict) -> list[str]:
         pts.append((tx, ty))
     lengths = [abs(b[0] - a[0]) + abs(b[1] - a[1]) for a, b in zip(pts, pts[1:])]
     total = sum(lengths) or 1
-    speed = max(140.0, total / 50)          # whole history in at most ~50 s
+    speed = max(120.0, total / 55)          # whole history in at most ~55 s
     move = total / speed
     dur = move + 4                          # board stays eaten for a moment, then refills and the loop restarts
+    if meta is not None:
+        meta.update(pts=pts, speed=speed, move=move, dur=dur)
     at, run, fi = {}, 0.0, 0
     for p, seg in zip(pts[1:], lengths):
         run += seg
@@ -155,109 +157,97 @@ def snake(cells: list, cell: int, gap: int, t: dict) -> list[str]:
     return out
 
 
+def head_x(pts: list, dist: float) -> float:
+    for a, b in zip(pts, pts[1:]):
+        seg = abs(b[0] - a[0]) + abs(b[1] - a[1])
+        if dist <= seg:
+            return a[0] + (b[0] - a[0]) * (dist / seg if seg else 0)
+        dist -= seg
+    return pts[-1][0]
+
+
 def render(data: dict, theme: str) -> str:
+    """GitLab-style single activity strip. The calendar holds the whole history since joining; the visible
+    one-year window pans along with the snake from the first day to today, then rewinds."""
     t = THEMES[theme]
     days = {d: n for y in data["years"] for d, n in y["days"].items()}
     set_thresholds(list(days.values()))
     first = dt.date.fromisoformat(data["created"])
     last = dt.date.fromisoformat(data["today"])
-    start = first - dt.timedelta(days=first.weekday())  # Monday on/before the first day (GitLab rows start on Monday)
+    start = first - dt.timedelta(days=first.weekday())  # Monday-first rows, like GitLab
     weeks = (last - start).days // 7 + 1
-    cell, gap, lw = 12, 3, 34
+    cell, gap, lw, view = 13, 3, 30, 53
     step = cell + gap
-    per_line = 56                                                    # ≈ 13 months per strip, like GitLab
-    lines = -(-weeks // per_line)
-    width = 24 + lw + per_line * step + 24
-    longest, current = streaks(data["years"])
+    gx, top = 24 + lw, 70                               # grid left edge, month-label baseline
+    gy = top + 12
+    width = gx + view * step + 22
+    shown = min(weeks, view)
+    content = weeks * step
+    min_tx = -(content - shown * step)                  # translate that shows the latest year
+
+    cells, d = [], first
+    while d <= last:
+        cells.append((d.isoformat(), gx + ((d - start).days // 7) * step, gy + d.weekday() * step, days.get(d.isoformat(), 0)))
+        d += dt.timedelta(days=1)
+    labels, m = [], dt.date(first.year + (first.month == 12), first.month % 12 + 1, 1)
+    while m <= last:
+        x = gx + ((m - start).days // 7) * step
+        jan = m.month == 1
+        labels.append(f'<text x="{x}" y="{top}" class="{"my" if jan else "m"}">{MONTHS[m.month - 1]}{f" {m.year}" if jan else ""}</text>')
+        m = dt.date(m.year + (m.month == 12), m.month % 12 + 1, 1)
+    meta: dict = {}
+    body = snake(cells, cell, gap, t, meta)
+
+    pan = ""
+    if meta and min_tx < 0:
+        pts, speed, move, dur = meta["pts"], meta["speed"], meta["move"], meta["dur"]
+        samples, vals, keys = 240, [], []
+        for i in range(samples + 1):
+            tt = move * i / samples
+            hx = head_x(pts, tt * speed)
+            tx = min(0.0, max(min_tx, gx + shown * step * 0.62 - hx))
+            vals.append(f"{tx:.1f},0")
+            keys.append(f"{tt / dur:.4f}")
+        vals += [vals[-1], f"{min(0.0, max(min_tx, gx + shown * step * 0.62 - pts[0][0])):.1f},0"]
+        keys += [f"{(dur - 0.9) / dur:.4f}", "1"]
+        pan = (f'<animateTransform attributeName="transform" type="translate" dur="{dur:.2f}s" repeatCount="indefinite" '
+               f'calcMode="linear" values="{";".join(vals)}" keyTimes="{";".join(keys)}"/>')
+
     since = first.strftime("%b %Y")
     tot = data["totals"]
-    tiles = [(f"{tot['contributions']:,}", "contributions"), (f"{tot['commits']:,}", "commits"),
-             (f"{tot['prs']:,}", "pull requests"), (f"{tot['repos']:,}", "repositories created"),
-             (f"{len(data['years'])}", "years on GitHub"), (f"{longest}", "longest streak (days)")]
-    out, top = [], 78
-    tw = (width - 48 - 5 * 10) / 6
-    for i, (value, label) in enumerate(tiles):
-        x = 24 + i * (tw + 10)
-        out.append(f'<g class="f" style="animation-delay:{i * 0.08:.2f}s"><rect x="{x:.1f}" y="{top}" width="{tw:.1f}" height="58" rx="10" '
-                   f'fill="{t["bg"]}" stroke="{t["border"]}"/><text x="{x + tw / 2:.1f}" y="{top + 27}" class="v">{value}</text>'
-                   f'<text x="{x + tw / 2:.1f}" y="{top + 46}" class="l">{label}</text></g>')
-
-    # continuous calendar: one column per week from the first day to today, wrapped into lines
-    y0, line_h = top + 58 + 44, 7 * step + 34
-    cells = []
-    d = first
-    while d <= last:
-        w = (d - start).days // 7
-        line, col = divmod(w, per_line)
-        x = 24 + lw + col * step
-        y = y0 + line * line_h + d.weekday() * step
-        cells.append((d.isoformat(), x, y, days.get(d.isoformat(), 0)))
-        d += dt.timedelta(days=1)
-    for line in range(lines):  # month labels on every line; the year is shown on January (and on the very first month)
-        labels = []
-        for w in range(line * per_line, min((line + 1) * per_line, weeks)):
-            for i in range(7):
-                day = start + dt.timedelta(weeks=w, days=i)
-                if day.day == 1 and first <= day <= last:
-                    yearly = day.month == 1 or not (labels or line)
-                    text = f"{MONTHS[day.month - 1]} {day.year}" if yearly else MONTHS[day.month - 1]
-                    labels.append([24 + lw + (w - line * per_line) * step, text, yearly])
-        kept = []
-        for lab in labels:  # drop a plain month label that would collide with its neighbour
-            if kept and lab[0] < kept[-1][0] + len(kept[-1][1]) * 6.2 + 6:
-                if lab[2] and not kept[-1][2]:
-                    kept[-1] = lab
-                continue
-            kept.append(lab)
-        kept = [lab for lab in kept if lab[0] + len(lab[1]) * 7 < width - 16]
-        for x, text, yearly in kept:
-            out.append(f'<text x="{x}" y="{y0 + line * line_h - 8}" class="{"my" if yearly else "m"}">{text}</text>')
-        for row, wd in ((0, "M"), (2, "W"), (4, "F"), (6, "S")):
-            out.append(f'<text x="{24 + lw - 12}" y="{y0 + line * line_h + row * step + cell - 1.5}" class="wd">{wd}</text>')
-    out.extend(snake(cells, cell, gap, t))
-    grid_bottom = y0 + lines * line_h - 22
-
-    # month-by-month bars for the whole history
-    months, m = [], dt.date(first.year, first.month, 1)
-    while m <= last:
-        n = sum(v for k, v in days.items() if k.startswith(m.strftime("%Y-%m")))
-        months.append((m, n))
-        m = dt.date(m.year + (m.month == 12), m.month % 12 + 1, 1)
-    bar_top, bar_h = grid_bottom + 46, 70
-    out.append(f'<text x="24" y="{bar_top - 14}" class="sec">Contributions per month</text>')
-    bw = (width - 48) / len(months)
-    peak_m = max([n for _, n in months] + [1])
-    for i, (m, n) in enumerate(months):
-        hgt = 0 if n == 0 else max(2, n / peak_m * bar_h)
-        x = 24 + i * bw
-        out.append(f'<rect x="{x + 0.6:.1f}" y="{bar_top + bar_h - hgt:.1f}" width="{max(bw - 1.2, 1):.1f}" height="{hgt:.1f}" rx="1.5" '
-                   f'fill="{t["levels"][3]}" class="b" style="animation-delay:{i * 0.01:.2f}s"><title>{m:%b %Y}: {n}</title></rect>')
-        if m.month == 1 or i == 0:
-            out.append(f'<line x1="{x:.1f}" y1="{bar_top + bar_h + 2}" x2="{x:.1f}" y2="{bar_top + bar_h + 7}" stroke="{t["muted"]}"/>'
-                       f'<text x="{x + 2:.1f}" y="{bar_top + bar_h + 19}" class="m">{m.year}</text>')
-    out.append(f'<line x1="24" y1="{bar_top + bar_h + 0.5}" x2="{width - 24}" y2="{bar_top + bar_h + 0.5}" stroke="{t["border"]}"/>')
-    height = bar_top + bar_h + 58
-    legend = "".join(f'<rect x="{24 + i * (cell + 4)}" y="{height - 30}" width="{cell}" height="{cell}" rx="3" fill="{c}"/>'
+    longest, current = streaks(data["years"])
+    height = gy + 7 * step + 58
+    clip_x, clip_w = gx - 4, shown * step + 6
+    wd = "".join(f'<text x="{gx - 10}" y="{gy + r * step + cell - 2}" class="wd">{w}</text>'
+                 for r, w in ((0, "M"), (2, "W"), (4, "F"), (6, "S")))
+    legend = "".join(f'<rect x="{gx - 4 + i * (cell + 3)}" y="{height - 34}" width="{cell}" height="{cell}" rx="3" fill="{c}"/>'
                      for i, c in enumerate(t["levels"]))
-    note = (f'<text x="{width - 24}" y="{height - 19.5}" class="lg" text-anchor="end">Commits, pull requests, issues and reviews '
-            f'(public) · current streak {current} days · updated {data["today"]}</text>')
+    fade = (f'<rect x="{clip_x}" y="{top - 14}" width="26" height="{7 * step + 30}" fill="url(#fl)"/>'
+            f'<rect x="{clip_x + clip_w - 26}" y="{top - 14}" width="26" height="{7 * step + 30}" fill="url(#fr)"/>')
     title = f"Activity · {since} – today"
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{title}: {tot['contributions']:,} contributions">
+    summary = (f"{tot['contributions']:,} contributions · {tot['commits']:,} commits · {tot['repos']:,} repositories · "
+               f"longest streak {longest} days")
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{title}: {summary}">
 <title>{title}</title>
 <style>
-.tt{{font:700 18px {FONT};fill:{t['text']}}} .st{{font:400 12.5px {FONT};fill:{t['muted']}}} .sec{{font:600 12.5px {FONT};fill:{t['text']}}}
-.v{{font:700 20px {FONT};fill:{t['accent']};text-anchor:middle}} .l{{font:400 11.5px {FONT};fill:{t['muted']};text-anchor:middle}}
-.m{{font:400 12px {FONT};fill:{t['muted']}}} .wd{{font:400 12px {FONT};fill:{t['muted']};text-anchor:end}} .my{{font:700 12px {FONT};fill:{t['text']}}} .lg{{font:400 11px {FONT};fill:{t['muted']}}}
-.f{{animation:fade .6s ease-out both}} .b{{transform-box:fill-box;transform-origin:bottom;animation:grow .8s ease-out both}}
-@keyframes fade{{from{{opacity:0}}to{{opacity:1}}}} @keyframes grow{{from{{transform:scaleY(0)}}to{{transform:scaleY(1)}}}}
-@media (prefers-reduced-motion:reduce){{.f,.b{{animation:none}}.snake{{display:none}}}}
+.tt{{font:700 20px {FONT};fill:{t['text']}}} .st{{font:400 12.5px {FONT};fill:{t['muted']};text-anchor:end}}
+.m{{font:400 12.5px {FONT};fill:{t['muted']}}} .my{{font:700 12.5px {FONT};fill:{t['text']}}}
+.wd{{font:400 12.5px {FONT};fill:{t['muted']};text-anchor:end}} .lg{{font:400 12.5px {FONT};fill:{t['muted']};text-anchor:end}}
+@media (prefers-reduced-motion:reduce){{.snake{{display:none}}}}
 </style>
-<rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="16" fill="{t['panel']}" stroke="{t['border']}"/>
-<text x="24" y="38" class="tt">{title}</text>
-<text x="24" y="60" class="st">Full history since joining GitHub · the snake eats every contribution day, oldest first, and grows as it goes</text>
-{''.join(out)}
+<defs>
+<clipPath id="win"><rect x="{clip_x}" y="{top - 16}" width="{clip_w}" height="{7 * step + 34}"/></clipPath>
+<linearGradient id="fl"><stop offset="0" stop-color="{t['panel']}"/><stop offset="1" stop-color="{t['panel']}" stop-opacity="0"/></linearGradient>
+<linearGradient id="fr"><stop offset="0" stop-color="{t['panel']}" stop-opacity="0"/><stop offset="1" stop-color="{t['panel']}"/></linearGradient>
+</defs>
+<rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="14" fill="{t['panel']}" stroke="{t['border']}"/>
+<text x="24" y="36" class="tt">Activity</text>
+<text x="{width - 22}" y="35" class="st">since {since} · {summary}</text>
+{wd}
+<g clip-path="url(#win)"><g transform="translate({min_tx:.1f},0)">{pan}{''.join(labels)}{''.join(body)}</g></g>
+{fade}
 {legend}
-{note}
+<text x="{width - 22}" y="{height - 23}" class="lg">Commits, pull requests, issues and reviews (public) · current streak {current} days · updated {data["today"]}</text>
 </svg>
 """
 
