@@ -56,7 +56,7 @@ I work from architecture to production: ADRs, workshops, PoCs and technology eva
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg">
-  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Operating systems: Linux, Red Hat, SUSE, Ubuntu, Debian, Kali Linux, QNX; Languages: Python, Bash, Java, Groovy, JavaScript, Go, Rust; Servers and databases: Nginx, PostgreSQL" src="./assets/stack-dark.svg" width="100%">
+  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Operating systems: Linux, Red Hat, SUSE, Ubuntu, Debian, Kali Linux, QNX; Languages: Python, Bash, C, C++, Java, Groovy, JavaScript, Go, Rust; Python data stack: pandas, NumPy, Matplotlib, Jupyter; Data engineering: Hadoop, Hive, Spark; Databases and servers: PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Cosmos DB, Nginx" src="./assets/stack-dark.svg" width="100%">
 </picture>
 </div>
 
@@ -251,7 +251,7 @@ Proof, not claims — every featured repository is tested on every push:
 </tr>
 <tr>
 <td><b>DevOps & platform</b></td>
-<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Python · Bash · Groovy (Jenkins pipelines) · Java · JavaScript · Go · Rust · Linux (Red Hat, SUSE, Ubuntu, Debian, Kali) · QNX</td>
+<td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Python · Bash · C · C++ · Groovy (Jenkins pipelines) · Java · JavaScript · Go · Rust · Linux (Red Hat, SUSE, Ubuntu, Debian, Kali) · QNX</td>
 <td>Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
 <td>Internal developer platforms</td>
 </tr>
@@ -272,6 +272,12 @@ Proof, not claims — every featured repository is tested on every push:
 <td>CI/CD design · Build & release systems · Infrastructure architecture · ADRs, PoCs & technology evaluation · Cloud migration & legacy modernisation</td>
 <td>Threat modelling (STRIDE) · signature-gated promotion</td>
 <td>Bazel · Large-scale distributed systems</td>
+</tr>
+<tr>
+<td><b>Data engineering</b></td>
+<td>Data pipelines · Hadoop · Hive · Spark · PostgreSQL · MySQL · Redis · pandas · NumPy</td>
+<td>DVC data pipelines · DynamoDB / Cosmos DB designs · MongoDB replica set · data-quality audits (pandas)</td>
+<td>—</td>
 </tr>
 <tr>
 <td><b>MLOps & AI infrastructure</b></td>

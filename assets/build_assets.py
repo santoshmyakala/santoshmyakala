@@ -133,9 +133,12 @@ STACK = [  # (category, [(icon file, label)]) — only technologies used in role
                       ("scikitlearn", "scikit-learn"), ("fastapi", "FastAPI"), ("claude", "Claude")]),
     ("Operating systems", [("linux", "Linux"), ("redhat", "Red Hat"), ("suse", "SUSE"), ("ubuntu", "Ubuntu"),
                            ("debian", "Debian"), ("kali", "Kali Linux"), ("qnx-text", "QNX")]),
-    ("Languages", [("python", "Python"), ("bash", "Bash"), ("java", "Java"), ("groovy", "Groovy"),
-                   ("javascript", "JavaScript"), ("go", "Go"), ("rust", "Rust")]),
-    ("Servers & databases", [("nginx", "Nginx"), ("postgresql", "PostgreSQL")]),
+    ("Languages", [("python", "Python"), ("bash", "Bash"), ("c", "C"), ("cplusplus", "C++"), ("java", "Java"),
+                   ("groovy", "Groovy"), ("javascript", "JavaScript"), ("go", "Go"), ("rust", "Rust")]),
+    ("Python data stack", [("pandas", "pandas"), ("numpy", "NumPy"), ("matplotlib", "Matplotlib"), ("jupyter", "Jupyter")]),
+    ("Data engineering", [("hadoop", "Hadoop"), ("hive", "Hive"), ("apachespark", "Spark")]),
+    ("Databases & servers", [("postgresql", "PostgreSQL"), ("mysql", "MySQL"), ("mongodb", "MongoDB"), ("redis", "Redis"),
+                             ("dynamodb", "DynamoDB"), ("cosmosdb", "Cosmos DB"), ("nginx", "Nginx")]),
 ]
 
 
@@ -152,18 +155,22 @@ def _inline_icon(name: str, x: float, y: float, size: float) -> str:
 
 def stack(t):
     label_w, tile, gap, row_h, width = 180, 64, 22, 104, 1164
-    rows = ""
-    for r, (category, items) in enumerate(STACK):
-        y = r * row_h
-        rows += f'<text x="0" y="{y + 38}" class="cat">{esc(category)}</text>'
-        rows += f'<line x1="0" y1="{y + row_h - 8}" x2="{width}" y2="{y + row_h - 8}" stroke="{t["border"]}" stroke-dasharray="2 6"/>'
-        for i, (icon, label) in enumerate(items):
+    per_line, rows, y0, k = 7, "", 0, 0
+    for category, items in STACK:
+        lines = -(-len(items) // per_line)
+        rows += f'<text x="0" y="{y0 + 38}" class="cat">{esc(category)}</text>'
+        rows += (f'<line x1="0" y1="{y0 + lines * row_h - 8}" x2="{width}" y2="{y0 + lines * row_h - 8}" '
+                 f'stroke="{t["border"]}" stroke-dasharray="2 6"/>')
+        for n, (icon, label) in enumerate(items):
+            r, i, k = n // per_line, n % per_line, k + 1
+            y = y0 + r * row_h
             x = label_w + i * (tile + gap + 48)
-            rows += (f'<g class="t" style="animation-delay:{(r * 7 + i) * 0.04:.2f}s">'
+            rows += (f'<g class="t" style="animation-delay:{k * 0.03:.2f}s">'
                      f'<rect x="{x}" y="{y + 4}" width="{tile}" height="{tile}" rx="14" fill="#ffffff" stroke="{t["border"]}"/>'
                      + _inline_icon(icon, x + 12, y + 16, 40) +
                      f'<text x="{x + tile / 2}" y="{y + tile + 22}" class="lbl">{esc(label)}</text></g>')
-    height = len(STACK) * row_h
+        y0 += lines * row_h
+    height = y0
     return f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{esc('Tech stack: ' + '; '.join(c + ': ' + ', '.join(l for _, l in it) for c, it in STACK))}">
 <style>.cat{{font:700 15px {FONT};fill:{t['text']}}} .lbl{{font:500 12px {FONT};fill:{t['muted']};text-anchor:middle}}
 .t{{animation:pop .5s ease-out both}} @keyframes pop{{from{{opacity:0;transform:translateY(6px)}}to{{opacity:1;transform:none}}}}
