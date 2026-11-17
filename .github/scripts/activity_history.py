@@ -76,10 +76,18 @@ def streaks(years: list[dict]) -> tuple[int, int]:
     return longest, current
 
 
-def level(n: int, peak: int) -> int:
+THRESHOLDS = [1, 2, 3]  # set per render from the quartiles of active days, like GitHub/GitLab shading
+
+
+def set_thresholds(counts: list[int]) -> None:
+    active = sorted(n for n in counts if n > 0) or [1]
+    THRESHOLDS[:] = [active[int(len(active) * q)] for q in (0.25, 0.5, 0.75)]
+
+
+def level(n: int, peak: int = 0) -> int:
     if n <= 0:
         return 0
-    return min(4, 1 + int(3 * n / max(peak, 1)))
+    return 1 + sum(n > th for th in THRESHOLDS)
 
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -150,6 +158,7 @@ def snake(cells: list, cell: int, gap: int, t: dict) -> list[str]:
 def render(data: dict, theme: str) -> str:
     t = THEMES[theme]
     days = {d: n for y in data["years"] for d, n in y["days"].items()}
+    set_thresholds(list(days.values()))
     first = dt.date.fromisoformat(data["created"])
     last = dt.date.fromisoformat(data["today"])
     start = first - dt.timedelta(days=first.weekday())  # Monday on/before the first day (GitLab rows start on Monday)
