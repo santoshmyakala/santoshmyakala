@@ -56,7 +56,7 @@ I work from architecture to production: ADRs, workshops, PoCs and technology eva
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/stack-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg">
-  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Observability: Prometheus, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Languages and OS: Python, Bash, Linux, PostgreSQL, Nginx" src="./assets/stack-dark.svg" width="100%">
+  <img alt="Tech stack — Cloud: AWS, Azure, Google Cloud; Containers and GitOps: Docker, Kubernetes, Helm, Argo CD; CI/CD: Jenkins, GitLab CI, GitHub Actions, Azure DevOps, Bitbucket, JFrog; IaC and security: Terraform, Ansible, Trivy, Falco; Monitoring and tracing: Prometheus, Grafana, OpenTelemetry, Datadog, Power BI; Logging: Loki, Elasticsearch, Logstash, Kibana; AI, GPU and ML: NVIDIA, PyTorch, MLflow, DVC, scikit-learn, FastAPI, Claude; Languages and OS: Python, Bash, Linux, PostgreSQL, Nginx" src="./assets/stack-dark.svg" width="100%">
 </picture>
 </div>
 
@@ -223,7 +223,7 @@ Proof, not claims — every featured repository is tested on every push:
 
 | Period | Role | Organisation | Highlights |
 |---|---|---|---|
-| 2024 – present | DevOps Engineer, Driver System Software Factory | **Scania Group** (TRATON) | GitLab CI/CD and developer-platform architecture across cloud, Android, QNX, embedded and VM environments; automated HIL/SIL pipelines (build → deploy → flash → validate); targeted CI workflows improved by ~40–50%; standardised DevContainers |
+| 2024 – present | DevOps Engineer, Driver System Software Factory | **Scania Group** (TRATON) | GitLab CI/CD and developer-platform architecture across cloud, Android, QNX, embedded and VM environments; automated HIL/SIL pipelines (build → deploy → flash → validate); targeted CI workflows improved by ~40–50%; standardised DevContainers; CI/platform observability with Datadog, OpenTelemetry, Prometheus/Grafana and Loki, plus Power BI CI reporting |
 | 2023 – 2024 | Infrastructure Specialist | **Play'n GO** | AWS infrastructure with Terraform; networking, connectivity and SSL/TLS certificate lifecycle; Bitbucket delivery workflows |
 | 2022 – 2023 | Cloud Engineer (consultant) | **ECARX Europe / Volvo Cars** via Explipro | AWS with Terraform (networking, IAM, compute, Kubernetes); GitOps with Argo CD; Helm charts; CI/CD traceability; GitLab/JFrog upgrades via GitOps; OAuth 2.0, MFA, Microsoft Entra ID; DevSecOps |
 | 2017 – 2022 | Senior Product Development Engineer | **Hexagon Manufacturing Intelligence** | Enterprise CI/CD for multiple desktop and web products; led Perforce → GitLab migration |
@@ -257,9 +257,9 @@ Proof, not claims — every featured repository is tested on every push:
 </tr>
 <tr>
 <td><b>Observability & reliability</b></td>
-<td>SRE practices · Monitoring & alerting · ELK stack · Prometheus</td>
-<td>Elastic Stack 9 · Prometheus metrics in services</td>
-<td>Grafana · Loki · OpenTelemetry</td>
+<td>SRE practices · Datadog · OpenTelemetry · Prometheus · Grafana · Loki · ELK stack · Power BI CI reporting · Monitoring & alerting</td>
+<td>Elastic Stack 9 · Prometheus metrics in services · DCGM GPU alerts</td>
+<td>LLM observability</td>
 </tr>
 <tr>
 <td><b>Security</b></td>
