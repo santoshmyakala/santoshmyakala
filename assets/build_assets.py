@@ -133,7 +133,9 @@ STACK = [  # (category, [(icon file, label)]) — only technologies used in role
                       ("scikitlearn", "scikit-learn"), ("fastapi", "FastAPI"), ("claude", "Claude")]),
     ("Operating systems", [("linux", "Linux"), ("redhat", "Red Hat"), ("suse", "SUSE"), ("ubuntu", "Ubuntu"),
                            ("debian", "Debian"), ("kali", "Kali Linux"), ("qnx-text", "QNX")]),
-    ("Languages & servers", [("python", "Python"), ("bash", "Bash"), ("postgresql", "PostgreSQL"), ("nginx", "Nginx")]),
+    ("Languages", [("python", "Python"), ("bash", "Bash"), ("java", "Java"), ("groovy", "Groovy"),
+                   ("javascript", "JavaScript"), ("go", "Go"), ("rust", "Rust")]),
+    ("Servers & databases", [("nginx", "Nginx"), ("postgresql", "PostgreSQL")]),
 ]
 
 
