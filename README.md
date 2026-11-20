@@ -96,7 +96,7 @@ A production AWS platform **designed from failure domains**: per-AZ NAT and VPC 
 
 `Terraform` `AWS` `ECS Fargate` `Aurora` `RDS Proxy` `CloudFront` `WAF` `Route 53`
 
-<sub>18 plan-time tests prove zonal isolation, capacity after an AZ loss, edge lockdown, rollback alarms and DR · ADRs + runbooks</sub>
+<sub>18 plan-time tests prove zonal isolation, AZ-loss capacity, edge lockdown, rollback alarms and DR · GitHub Actions: OIDC plans on PRs, staged deploys with approval, nightly drift issues</sub>
 
 </td>
 <td width="50%" valign="top">
@@ -106,7 +106,7 @@ The code behind the diagram words: **exactly-once effects on an at-least-once qu
 
 `Python` `FastAPI` `PostgreSQL` `SQS` `ElasticMQ` `Prometheus`
 
-<sub>Crash-after-commit test charges once · 27× retry amplification measured and fixed · tested against real Postgres + ElasticMQ</sub>
+<sub>Weekly GitHub Actions game day: dependency outage, overload and a worker SIGKILL mid-batch → 200/200 captured, none twice · 27× retry amplification measured and fixed</sub>
 
 </td>
 </tr>
