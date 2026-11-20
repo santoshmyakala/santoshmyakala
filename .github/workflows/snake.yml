@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [".github/workflows/snake.yml", ".github/scripts/activity_history.py"]
+    paths: [".github/workflows/snake.yml", ".github/scripts/activity_history.py", ".github/scripts/languages.py"]
 
 permissions:
   contents: write
@@ -24,6 +24,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python3 .github/scripts/activity_history.py "${{ github.repository_owner }}" "$RUNNER_TEMP/activity"
+      - name: Most used languages (own public repositories, forks excluded)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/languages.py "${{ github.repository_owner }}" "$RUNNER_TEMP/activity"
       - uses: Platane/snk@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
         with:
           github_user_name: ${{ github.repository_owner }}
@@ -38,6 +42,6 @@ jobs:
           git init -q -b output
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add snake.svg snake-dark.svg activity-dark.svg activity-light.svg
+          git add snake.svg snake-dark.svg activity-dark.svg activity-light.svg languages-dark.svg languages-light.svg
           git commit -q -m "Update contribution graphics"
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" output

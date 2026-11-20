@@ -370,6 +370,11 @@ Software Architecture of Large-Scale Systems · Cloud Security Lead & Cloud Lead
 </picture>
 <br>
 <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/languages-dark.svg">
+  <img alt="Most used languages across my own public repositories, by bytes of code" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/languages-light.svg" width="100%">
+</picture>
+<br>
+<picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=santoshmyakala&include_all_commits=true&show_icons=true&hide_border=true&theme=github_dark">
   <img height="165" alt="GitHub statistics for santoshmyakala" src="https://github-readme-stats.vercel.app/api?username=santoshmyakala&include_all_commits=true&show_icons=true&hide_border=true&theme=default">
 </picture>
