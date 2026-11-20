@@ -24,7 +24,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/impact-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/impact-light.svg">
-  <img alt="15+ years in IT; 12 years DevOps and cloud; 10 tested project repos; 10 Terraform stacks tested; 127 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
+  <img alt="15+ years in IT; 12 years DevOps and cloud; 12 tested project repos; 12 Terraform stacks tested; 179 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
 </picture>
 
 </div>
@@ -85,6 +85,28 @@ HA **web → app → MongoDB replica set** across three AZs with WireGuard VPN, 
 `Terraform` `AWS` `ALB` `Auto Scaling` `MongoDB` `WireGuard`
 
 <sub>5 plan-level tests with a mocked AWS provider · IMDSv2 · encrypted volumes</sub>
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### [aws-saas-production-platform](https://github.com/santoshmyakala/aws-saas-production-platform)
+A production AWS platform **designed from failure domains**: per-AZ NAT and VPC endpoints, N+1 AZ capacity math, CloudFront + WAF, ECS Fargate **canary deploys rolled back by SLO alarms**, Aurora + RDS Proxy, SQS + DLQ, burn-rate alerting and **warm-standby DR** (Aurora Global, Route 53 failover).
+
+`Terraform` `AWS` `ECS Fargate` `Aurora` `RDS Proxy` `CloudFront` `WAF` `Route 53`
+
+<sub>18 plan-time tests prove zonal isolation, capacity after an AZ loss, edge lockdown, rollback alarms and DR · ADRs + runbooks</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [resilience-patterns-lab](https://github.com/santoshmyakala/resilience-patterns-lab)
+The code behind the diagram words: **exactly-once effects on an at-least-once queue** (idempotency keys, transactional outbox, ack-after-commit), deadlines, **retry budgets**, circuit breakers and load shedding.
+
+`Python` `FastAPI` `PostgreSQL` `SQS` `ElasticMQ` `Prometheus`
+
+<sub>Crash-after-commit test charges once · 27× retry amplification measured and fixed · tested against real Postgres + ElasticMQ</sub>
 
 </td>
 </tr>
@@ -201,6 +223,8 @@ Proof, not claims — every featured repository is tested on every push:
 
 | Repository | CI |
 |---|---|
+| [aws-saas-production-platform](https://github.com/santoshmyakala/aws-saas-production-platform) | [![ci](https://github.com/santoshmyakala/aws-saas-production-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/aws-saas-production-platform/actions/workflows/ci.yml) |
+| [resilience-patterns-lab](https://github.com/santoshmyakala/resilience-patterns-lab) | [![ci](https://github.com/santoshmyakala/resilience-patterns-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/resilience-patterns-lab/actions/workflows/ci.yml) |
 | [cloud-solution-architectures](https://github.com/santoshmyakala/cloud-solution-architectures) | [![ci](https://github.com/santoshmyakala/cloud-solution-architectures/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/cloud-solution-architectures/actions/workflows/ci.yml) |
 | [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline) | [![ci](https://github.com/santoshmyakala/devsecops-gitops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/devsecops-gitops-pipeline/actions/workflows/ci.yml) |
 | [devsecops-reference-architectures](https://github.com/santoshmyakala/devsecops-reference-architectures) | [![ci](https://github.com/santoshmyakala/devsecops-reference-architectures/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/devsecops-reference-architectures/actions/workflows/ci.yml) |
