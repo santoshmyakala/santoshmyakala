@@ -77,16 +77,6 @@ I work from architecture to production: ADRs, workshops, PoCs and technology eva
 <sub>6 Terraform stacks with offline <code>terraform test</code> · blocking Trivy IaC gate · identical validation logic on both clouds</sub>
 
 </td>
-<td width="50%" valign="top">
-
-### [aws-three-tier-platform](https://github.com/santoshmyakala/aws-three-tier-platform)
-HA **web → app → MongoDB replica set** across three AZs with WireGuard VPN, least-privilege security groups and SSM-only access (no SSH).
-
-`Terraform` `AWS` `ALB` `Auto Scaling` `MongoDB` `WireGuard`
-
-<sub>5 plan-level tests with a mocked AWS provider · IMDSv2 · encrypted volumes</sub>
-
-</td>
 </tr>
 <tr>
 <td width="50%" valign="top">
@@ -123,6 +113,16 @@ The code behind the diagram words: **exactly-once effects on an at-least-once qu
 </td>
 </tr>
 <tr>
+<td width="50%" valign="top">
+
+### [aws-three-tier-platform](https://github.com/santoshmyakala/aws-three-tier-platform)
+HA **web → app → MongoDB replica set** across three AZs with WireGuard VPN, least-privilege security groups and SSM-only access (no SSH).
+
+`Terraform` `AWS` `ALB` `Auto Scaling` `MongoDB` `WireGuard`
+
+<sub>5 plan-level tests with a mocked AWS provider · IMDSv2 · encrypted volumes</sub>
+
+</td>
 <td width="50%" valign="top">
 
 ### [ansible-elk-stack](https://github.com/santoshmyakala/ansible-elk-stack)
@@ -179,7 +179,7 @@ A **Rust CLI and GitHub Action** that reads a CI log and says **why a job failed
 
 <table>
 <tr>
-<td colspan="2" valign="top">
+<td width="50%" valign="top">
 
 ### [devsecops-gitops-pipeline](https://github.com/santoshmyakala/devsecops-gitops-pipeline)
 Central **reusable secure-delivery workflow** (gitleaks → Semgrep → Trivy → SBOM → image gate → keyless Sigstore signing), signature-gated GitOps promotion, Argo CD, and **Kyverno 1.20** policies admitting only pipeline-signed images.
@@ -271,7 +271,7 @@ Wave-farm power from 16-buoy layouts at four sites: **gradient boosting vs MLP v
 </td>
 </tr>
 <tr>
-<td width="50%" valign="top">
+<td colspan="2" valign="top">
 
 ### [fashion-mnist-neural-networks](https://github.com/santoshmyakala/fashion-mnist-neural-networks)
 **Softmax regression → MLP → CNN** in PyTorch under one pipeline, so each architectural step is measured.
