@@ -29,6 +29,9 @@ contributionsCollection(from:$from,to:$to){totalCommitContributions totalPullReq
 totalPullRequestReviewContributions totalIssueContributions totalRepositoryContributions restrictedContributionsCount
 contributionCalendar{totalContributions weeks{contributionDays{date contributionCount}}}}}}"""
 
+STARS_QUERY = """query($login:String!,$after:String){user(login:$login){repositories(first:100,after:$after,
+ownerAffiliations:OWNER,isFork:false){pageInfo{hasNextPage endCursor}nodes{stargazerCount}}}}"""
+
 
 def gql(query: str, **variables) -> dict:
     req = urllib.request.Request(API, data=json.dumps({"query": query, "variables": variables}).encode(),
@@ -45,7 +48,7 @@ def fetch(login: str) -> dict:
     created = dt.datetime.fromisoformat(
         gql("query($l:String!){user(login:$l){createdAt}}", l=login)["user"]["createdAt"].replace("Z", "+00:00"))
     today = dt.datetime.now(dt.timezone.utc)
-    years, totals = [], dict(contributions=0, commits=0, prs=0, reviews=0, issues=0, repos=0)
+    years, totals = [], dict(contributions=0, commits=0, prs=0, reviews=0, issues=0, repos=0, stars=0)
     for year in range(created.year, today.year + 1):
         start = max(created, dt.datetime(year, 1, 1, tzinfo=dt.timezone.utc))
         end = min(today, dt.datetime(year, 12, 31, 23, 59, 59, tzinfo=dt.timezone.utc))
@@ -58,6 +61,13 @@ def fetch(login: str) -> dict:
         totals["reviews"] += c["totalPullRequestReviewContributions"]
         totals["issues"] += c["totalIssueContributions"]
         totals["repos"] += c["totalRepositoryContributions"]
+    after = None
+    while True:  # total stars earned across owned, non-fork repositories
+        page = gql(STARS_QUERY, login=login, after=after)["user"]["repositories"]
+        totals["stars"] += sum(n["stargazerCount"] for n in page["nodes"])
+        if not page["pageInfo"]["hasNextPage"]:
+            break
+        after = page["pageInfo"]["endCursor"]
     return dict(created=created.date().isoformat(), today=today.date().isoformat(), years=years, totals=totals)
 
 
@@ -252,12 +262,60 @@ def render(data: dict, theme: str) -> str:
 """
 
 
+def stats_card(data: dict, theme: str) -> str:
+    """A self-hosted, all-time GitHub stats card: every total is summed across every year since the
+    account was created, so it never shows only the last year (unlike the default stats widgets)."""
+    t = THEMES[theme]
+    tot = data["totals"]
+    longest, current = streaks(data["years"])
+    since = dt.date.fromisoformat(data["created"]).strftime("%b %Y")
+    width, pad, height = 840, 24, 170
+    tiles = [
+        (f"{tot['contributions']:,}", "contributions"),
+        (f"{tot['commits']:,}", "commits"),
+        (f"{tot['prs']:,}", "pull requests"),
+        (f"{tot['reviews']:,}", "reviews"),
+        (f"{tot['issues']:,}", "issues"),
+        (f"{tot['repos']:,}", "repositories"),
+    ]
+    inner = width - 2 * pad
+    colw = inner / len(tiles)
+    body = []
+    for i, (value, label) in enumerate(tiles):
+        cx = pad + colw * i + colw / 2
+        if i:
+            dx = pad + colw * i
+            body.append(f'<line x1="{dx:.1f}" y1="74" x2="{dx:.1f}" y2="126" stroke="{t["border"]}"/>')
+        body.append(f'<text x="{cx:.1f}" y="102" class="v" style="animation-delay:{i * 0.08:.2f}s">{value}</text>'
+                     f'<text x="{cx:.1f}" y="124" class="l">{label}</text>')
+    foot = (f"Longest streak {longest} days · current streak {current} days · "
+            f"{tot['stars']:,} stars earned · public contributions · updated {data['today']}")
+    aria = f"All-time GitHub stats since {since}: " + ", ".join(f"{v} {l}" for v, l in tiles)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{aria}">
+<title>GitHub activity — all time</title>
+<style>
+.tt{{font:700 20px {FONT};fill:{t['text']}}} .st{{font:400 12.5px {FONT};fill:{t['muted']};text-anchor:end}}
+.v{{font:700 26px {FONT};fill:{t['accent']};text-anchor:middle;transform-box:fill-box;transform-origin:center;animation:pop .8s cubic-bezier(.2,.7,.2,1) both}}
+.l{{font:400 12.5px {FONT};fill:{t['muted']};text-anchor:middle}} .ft{{font:400 12px {FONT};fill:{t['muted']}}}
+@keyframes pop{{from{{opacity:0;transform:translateY(6px)}}to{{opacity:1;transform:translateY(0)}}}}
+@media (prefers-reduced-motion:reduce){{.v{{animation:none}}}}
+</style>
+<rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="14" fill="{t['panel']}" stroke="{t['border']}"/>
+<text x="24" y="36" class="tt">GitHub activity — all time</text>
+<text x="{width - 22}" y="35" class="st">since {since}</text>
+{''.join(body)}
+<text x="24" y="{height - 20}" class="ft">{foot}</text>
+</svg>
+"""
+
+
 def main() -> None:
     login, out = sys.argv[1], Path(sys.argv[2])
     out.mkdir(parents=True, exist_ok=True)
     data = json.loads(Path(os.environ["ACTIVITY_FIXTURE"]).read_text()) if os.environ.get("ACTIVITY_FIXTURE") else fetch(login)
     for theme in THEMES:
         (out / f"activity-{theme}.svg").write_text(render(data, theme))
+        (out / f"stats-{theme}.svg").write_text(stats_card(data, theme))
     print(f"{login}: {data['totals']['contributions']} contributions across {len(data['years'])} years since {data['created']}")
 
 

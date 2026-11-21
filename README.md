@@ -430,12 +430,8 @@ Software Architecture of Large-Scale Systems · Cloud Security Lead & Cloud Lead
 </picture>
 <br>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=santoshmyakala&include_all_commits=true&show_icons=true&hide_border=true&theme=github_dark">
-  <img height="165" alt="GitHub statistics for santoshmyakala" src="https://github-readme-stats.vercel.app/api?username=santoshmyakala&include_all_commits=true&show_icons=true&hide_border=true&theme=default">
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=santoshmyakala&hide_border=true&theme=github-dark-blue">
-  <img height="165" alt="GitHub contribution streak for santoshmyakala" src="https://streak-stats.demolab.com?user=santoshmyakala&hide_border=true&theme=default">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/stats-dark.svg">
+  <img alt="All-time GitHub stats since joining: total contributions, commits, pull requests, reviews, issues and repositories, with longest and current streak and stars earned" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/stats-light.svg" width="100%">
 </picture>
 </div>
 
