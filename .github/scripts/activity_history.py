@@ -12,6 +12,8 @@ import datetime as dt
 import json
 import os
 import sys
+import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -44,30 +46,66 @@ def gql(query: str, **variables) -> dict:
     return body["data"]
 
 
+def search_count(kind: str, query: str) -> int | None:
+    """total_count from a REST search (kind = "commits" or "issues"); None on failure.
+
+    The per-type fields of GraphQL's contributionsCollection come back as 0 under the workflow's
+    bot token, but the search API returns real all-time public totals for any authenticated token.
+    """
+    url = f"https://api.github.com/search/{kind}?q={urllib.parse.quote(query)}&per_page=1"
+    req = urllib.request.Request(url, headers={
+        "Authorization": f"bearer {os.environ['GITHUB_TOKEN']}",
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "profile-activity-card"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.load(r).get("total_count")
+    except Exception as e:  # noqa: BLE001 — never let an optional stat break the activity graph
+        print(f"search {kind} ({query}) failed: {e}", file=sys.stderr)
+        return None
+
+
 def fetch(login: str) -> dict:
     created = dt.datetime.fromisoformat(
         gql("query($l:String!){user(login:$l){createdAt}}", l=login)["user"]["createdAt"].replace("Z", "+00:00"))
     today = dt.datetime.now(dt.timezone.utc)
-    years, totals = [], dict(contributions=0, commits=0, prs=0, reviews=0, issues=0, repos=0, stars=0)
+
+    # Contribution calendar per year (public), for the graph, the all-time contribution total and streaks.
+    years, contributions, cc_commits = [], 0, 0
     for year in range(created.year, today.year + 1):
         start = max(created, dt.datetime(year, 1, 1, tzinfo=dt.timezone.utc))
         end = min(today, dt.datetime(year, 12, 31, 23, 59, 59, tzinfo=dt.timezone.utc))
         c = gql(YEAR_QUERY, login=login, **{"from": start.isoformat(), "to": end.isoformat()})["user"]["contributionsCollection"]
         days = {d["date"]: d["contributionCount"] for w in c["contributionCalendar"]["weeks"] for d in w["contributionDays"]}
         years.append(dict(year=year, total=c["contributionCalendar"]["totalContributions"], days=days))
-        totals["contributions"] += c["contributionCalendar"]["totalContributions"]
-        totals["commits"] += c["totalCommitContributions"] + c["restrictedContributionsCount"]
-        totals["prs"] += c["totalPullRequestContributions"]
-        totals["reviews"] += c["totalPullRequestReviewContributions"]
-        totals["issues"] += c["totalIssueContributions"]
-        totals["repos"] += c["totalRepositoryContributions"]
+        contributions += c["contributionCalendar"]["totalContributions"]
+        cc_commits += c["totalCommitContributions"] + c["restrictedContributionsCount"]  # fallback only
+
+    # Owned public, non-fork repositories and the stars they have earned.
+    repos = stars = 0
     after = None
-    while True:  # total stars earned across owned, non-fork repositories
+    while True:
         page = gql(STARS_QUERY, login=login, after=after)["user"]["repositories"]
-        totals["stars"] += sum(n["stargazerCount"] for n in page["nodes"])
+        repos += len(page["nodes"])
+        stars += sum(n["stargazerCount"] for n in page["nodes"])
         if not page["pageInfo"]["hasNextPage"]:
             break
         after = page["pageInfo"]["endCursor"]
+
+    # All-time public commits, PRs, reviews and issues via the search API.
+    counts = {}
+    for key, (kind, query) in {
+        "commits": ("commits", f"author:{login}"),
+        "prs": ("issues", f"type:pr author:{login}"),
+        "reviews": ("issues", f"type:pr reviewed-by:{login}"),
+        "issues": ("issues", f"type:issue author:{login}"),
+    }.items():
+        counts[key] = search_count(kind, query)
+        time.sleep(2)  # stay clear of the search API's secondary rate limit
+
+    totals = dict(contributions=contributions, commits=counts["commits"] if counts["commits"] is not None else cc_commits,
+                  prs=counts["prs"] or 0, reviews=counts["reviews"] or 0, issues=counts["issues"] or 0,
+                  repos=repos, stars=stars)
     return dict(created=created.date().isoformat(), today=today.date().isoformat(), years=years, totals=totals)
 
 

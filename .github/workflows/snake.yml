@@ -12,6 +12,12 @@ on:
 permissions:
   contents: write
 
+# Only one run may publish to the output branch at a time; a newer run waits rather than racing
+# the ref lock (two concurrent force-pushes otherwise fail with "cannot lock ref").
+concurrency:
+  group: contribution-snake
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
