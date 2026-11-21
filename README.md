@@ -206,6 +206,22 @@ Eight DevSecOps architectures across platforms and lifecycle stages: GitHub, **G
 
 <table>
 <tr>
+<td colspan="2" valign="top">
+
+### [ansible-llm-platform](https://github.com/santoshmyakala/ansible-llm-platform)
+A **self-hosted LLM platform provisioned end to end with Ansible**:
+- hardened nodes with an inventory-generated nftables firewall;
+- **llama.cpp and vLLM** chosen per node (CPU, NVIDIA, AMD/Intel), with every model file checked against its published SHA-256;
+- an **in-house gateway**: team keys stored only as hashes, per-team request and token limits, least-in-flight routing with **failover**;
+- Prometheus SLO alerts and Grafana.
+
+`Ansible` `llama.cpp` `vLLM` `Python` `nftables` `Prometheus` `Grafana` `Open WebUI`
+
+<sub>CI installs every role on a fresh VM with a real model, re-runs it (0 changes), then verifies answers, 401/429 and failover with a server stopped · 26 gateway tests · ansible-lint production profile</sub>
+
+</td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### [ai-infrastructure-hpc-gpu](https://github.com/santoshmyakala/ai-infrastructure-hpc-gpu)
@@ -274,6 +290,7 @@ Proof, not claims — every featured repository is tested on every push:
 
 | Repository | CI |
 |---|---|
+| [ansible-llm-platform](https://github.com/santoshmyakala/ansible-llm-platform) | [![ci](https://github.com/santoshmyakala/ansible-llm-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ansible-llm-platform/actions/workflows/ci.yml) |
 | [k8s-guardrails-webhook](https://github.com/santoshmyakala/k8s-guardrails-webhook) | [![ci](https://github.com/santoshmyakala/k8s-guardrails-webhook/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/k8s-guardrails-webhook/actions/workflows/ci.yml) |
 | [production-orders-service](https://github.com/santoshmyakala/production-orders-service) | [![ci](https://github.com/santoshmyakala/production-orders-service/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/production-orders-service/actions/workflows/ci.yml) |
 | [ci-failure-triage](https://github.com/santoshmyakala/ci-failure-triage) | [![ci](https://github.com/santoshmyakala/ci-failure-triage/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ci-failure-triage/actions/workflows/ci.yml) |

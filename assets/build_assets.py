@@ -23,9 +23,9 @@ THEMES = {
 METRICS = [  # (value, label) — verifiable from the repositories
     ("15+", "years in IT"),
     ("12", "years DevOps & cloud"),
-    ("16", "tested project repos"),
+    ("17", "tested project repos"),
     ("13", "Terraform stacks tested"),
-    ("254", "automated tests in CI"),
+    ("280", "automated tests in CI"),
     ("100%", "images signed + SBOM"),
 ]
 
