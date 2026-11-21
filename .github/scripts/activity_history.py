@@ -306,16 +306,26 @@ def stats_card(data: dict, theme: str) -> str:
     t = THEMES[theme]
     tot = data["totals"]
     longest, current = streaks(data["years"])
-    since = dt.date.fromisoformat(data["created"]).strftime("%b %Y")
+    created = dt.date.fromisoformat(data["created"])
+    since = created.strftime("%b %Y")
+    active_days = sum(1 for y in data["years"] for n in y["days"].values() if n)
+    years_active = dt.date.fromisoformat(data["today"]).year - created.year + 1
     width, pad, height = 840, 24, 170
-    tiles = [
-        (f"{tot['contributions']:,}", "contributions"),
-        (f"{tot['commits']:,}", "commits"),
-        (f"{tot['prs']:,}", "pull requests"),
-        (f"{tot['reviews']:,}", "reviews"),
-        (f"{tot['issues']:,}", "issues"),
-        (f"{tot['repos']:,}", "repositories"),
+    # Show the first six metrics that have a value, so the card never displays empty tiles (an
+    # account that commits straight to its own repos may have no public PRs, issues or reviews).
+    candidates = [
+        (tot["contributions"], "contributions"),
+        (tot["commits"], "commits"),
+        (tot["repos"], "repositories"),
+        (tot["prs"], "pull requests"),
+        (tot["issues"], "issues"),
+        (tot["reviews"], "reviews"),
+        (active_days, "active days"),
+        (longest, "longest streak"),
+        (years_active, "years on GitHub"),
+        (tot["stars"], "stars earned"),
     ]
+    tiles = [(f"{v:,}", label) for v, label in candidates if v][:6]
     inner = width - 2 * pad
     colw = inner / len(tiles)
     body = []
@@ -326,8 +336,16 @@ def stats_card(data: dict, theme: str) -> str:
             body.append(f'<line x1="{dx:.1f}" y1="74" x2="{dx:.1f}" y2="126" stroke="{t["border"]}"/>')
         body.append(f'<text x="{cx:.1f}" y="102" class="v" style="animation-delay:{i * 0.08:.2f}s">{value}</text>'
                      f'<text x="{cx:.1f}" y="124" class="l">{label}</text>')
-    foot = (f"Longest streak {longest} days · current streak {current} days · "
-            f"{tot['stars']:,} stars earned · public contributions · updated {data['today']}")
+    shown = {label for _, label in tiles}
+    parts = ["public contributions across all repositories"]
+    if "longest streak" not in shown:
+        parts.append(f"longest streak {longest} days")
+    if current:
+        parts.append(f"current streak {current} days")
+    if tot["stars"]:
+        parts.append(f"{tot['stars']:,} stars earned")
+    parts.append(f"updated {data['today']}")
+    foot = " · ".join(parts)
     aria = f"All-time GitHub stats since {since}: " + ", ".join(f"{v} {l}" for v, l in tiles)
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{aria}">
 <title>GitHub activity — all time</title>
