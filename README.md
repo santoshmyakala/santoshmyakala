@@ -24,7 +24,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/impact-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/impact-light.svg">
-  <img alt="15+ years in IT; 12 years DevOps and cloud; 12 tested project repos; 12 Terraform stacks tested; 179 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
+  <img alt="15+ years in IT; 12 years DevOps and cloud; 13 tested project repos; 13 Terraform stacks tested; 191 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
 </picture>
 
 </div>
@@ -107,6 +107,18 @@ The code behind the diagram words: **exactly-once effects on an at-least-once qu
 `Python` `FastAPI` `PostgreSQL` `SQS` `ElasticMQ` `Prometheus`
 
 <sub>Weekly GitHub Actions game day: dependency outage, overload and a worker SIGKILL mid-batch → 200/200 captured, none twice · 27× retry amplification measured and fixed</sub>
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top">
+
+### [azure-hybrid-manufacturing-platform](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform)
+**Hybrid cloud for a factory**: ExpressRoute primary / VPN backup into an Azure Firewall Premium hub, **OT/IT segmentation as IEC 62443 zones and conduits** (nothing in Azure can reach the control network), private-only PaaS with Entra ID auth, private AKS, hybrid DNS, Azure Policy + FinOps budgets, SQL failover-group DR.
+
+`Terraform` `Azure` `ExpressRoute` `Azure Firewall` `AKS` `Event Hubs` `Azure Policy` `FinOps`
+
+<sub>12 offline tests prove inspection of every flow, OT conduits, private endpoints, policy and budgets · GitHub Actions with OIDC federated credentials · ADRs + runbooks</sub>
 
 </td>
 </tr>
@@ -223,6 +235,7 @@ Proof, not claims — every featured repository is tested on every push:
 
 | Repository | CI |
 |---|---|
+| [azure-hybrid-manufacturing-platform](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform) | [![ci](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform/actions/workflows/ci.yml) |
 | [aws-saas-production-platform](https://github.com/santoshmyakala/aws-saas-production-platform) | [![ci](https://github.com/santoshmyakala/aws-saas-production-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/aws-saas-production-platform/actions/workflows/ci.yml) |
 | [resilience-patterns-lab](https://github.com/santoshmyakala/resilience-patterns-lab) | [![ci](https://github.com/santoshmyakala/resilience-patterns-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/resilience-patterns-lab/actions/workflows/ci.yml) |
 | [cloud-solution-architectures](https://github.com/santoshmyakala/cloud-solution-architectures) | [![ci](https://github.com/santoshmyakala/cloud-solution-architectures/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/cloud-solution-architectures/actions/workflows/ci.yml) |
