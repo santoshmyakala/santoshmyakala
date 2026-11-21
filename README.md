@@ -430,8 +430,8 @@ Software Architecture of Large-Scale Systems · Cloud Security Lead & Cloud Lead
 </picture>
 <br>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/stats-dark.svg">
-  <img alt="All-time GitHub stats since joining: total contributions, commits, pull requests, reviews, issues and repositories, with longest and current streak and stars earned" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/stats-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/stats-dark.svg?v=2">
+  <img alt="All-time GitHub stats since joining: total contributions, commits, pull requests, reviews, issues and repositories, with longest and current streak and stars earned" src="https://raw.githubusercontent.com/santoshmyakala/santoshmyakala/output/stats-light.svg?v=2" width="100%">
 </picture>
 </div>
 
