@@ -136,6 +136,45 @@ Secured **Elastic Stack 9**: auth on, least-privilege Logstash writer, Kibana on
 </tr>
 </table>
 
+#### ⚙️ Platform services & tooling — Go · Java · Rust
+
+<table>
+<tr>
+<td colspan="2" valign="top">
+
+### [k8s-guardrails-webhook](https://github.com/santoshmyakala/k8s-guardrails-webhook)
+A **Kubernetes validating admission webhook** in Go that admits only **digest-pinned images from trusted registries**, with FinOps labels, resource requests/limits and a non-root, unprivileged runtime. Ratchets on `UPDATE`, audited break-glass, warn-then-enforce rollout, Prometheus metrics; **fails closed**, TLS 1.3 with cert-manager hot-reload and no API access.
+
+`Go` `Kubernetes` `Admission webhook` `cert-manager` `kustomize` `Prometheus` `cosign`
+
+<sub>21 unit/HTTP tests + a 9-check kind e2e against a real API server (incl. fail-closed) · distroless image, signed by digest with cosign (SBOM + SLSA provenance)</sub>
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### [production-orders-service](https://github.com/santoshmyakala/production-orders-service)
+A **Spring Boot 4 / Java 21** service for plant production orders: idempotent creation, ETag/If-Match optimistic locking, **transactional outbox** (`SKIP LOCKED` relay), ERP calls behind timeouts, retries and a **circuit breaker**, OAuth2 JWT roles — the kind of workload the Azure hybrid platform hosts.
+
+`Java 21` `Spring Boot 4` `PostgreSQL` `Flyway` `Resilience4j` `Testcontainers` `Docker`
+
+<sub>22 tests incl. Testcontainers PostgreSQL + a real ERP stub, 92% line coverage · distroless layered image · manifests pass the guardrails webhook</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [ci-failure-triage](https://github.com/santoshmyakala/ci-failure-triage)
+A **Rust CLI and GitHub Action** that reads a CI log and says **why a job failed and whether a retry is worth it**: 35 weighted rules across 10 categories, root-cause-over-symptom scoring, GitHub / GitLab / Jenkins logs.
+
+`Rust` `clap` `regex` `GitHub Actions` `cosign`
+
+<sub>20 tests · streams 500 MB in ~6 s (84 MB/s), constant memory · signed Linux / macOS / Windows releases</sub>
+
+</td>
+</tr>
+</table>
+
 #### 🔐 DevSecOps & software supply chain
 
 <table>
@@ -235,6 +274,9 @@ Proof, not claims — every featured repository is tested on every push:
 
 | Repository | CI |
 |---|---|
+| [k8s-guardrails-webhook](https://github.com/santoshmyakala/k8s-guardrails-webhook) | [![ci](https://github.com/santoshmyakala/k8s-guardrails-webhook/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/k8s-guardrails-webhook/actions/workflows/ci.yml) |
+| [production-orders-service](https://github.com/santoshmyakala/production-orders-service) | [![ci](https://github.com/santoshmyakala/production-orders-service/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/production-orders-service/actions/workflows/ci.yml) |
+| [ci-failure-triage](https://github.com/santoshmyakala/ci-failure-triage) | [![ci](https://github.com/santoshmyakala/ci-failure-triage/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ci-failure-triage/actions/workflows/ci.yml) |
 | [azure-hybrid-manufacturing-platform](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform) | [![ci](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/azure-hybrid-manufacturing-platform/actions/workflows/ci.yml) |
 | [aws-saas-production-platform](https://github.com/santoshmyakala/aws-saas-production-platform) | [![ci](https://github.com/santoshmyakala/aws-saas-production-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/aws-saas-production-platform/actions/workflows/ci.yml) |
 | [resilience-patterns-lab](https://github.com/santoshmyakala/resilience-patterns-lab) | [![ci](https://github.com/santoshmyakala/resilience-patterns-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/resilience-patterns-lab/actions/workflows/ci.yml) |
@@ -289,7 +331,7 @@ Proof, not claims — every featured repository is tested on every push:
 <tr>
 <td><b>DevOps & platform</b></td>
 <td>GitLab CI/CD · Jenkins · GitHub Actions · Bitbucket · Docker · DevContainers · Kubernetes · Helm · Argo CD / GitOps · Terraform · Ansible · JFrog Artifactory · Python · Bash · C · C++ · Groovy (Jenkins pipelines) · Java · JavaScript · Go · Rust · Linux (Red Hat, SUSE, Ubuntu, Debian, Kali) · QNX</td>
-<td>Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
+<td>Go validating admission webhook · distroless multi-stage images · kind e2e · Reusable workflows · Argo CD app-of-apps · <code>terraform test</code> with mocked providers</td>
 <td>Internal developer platforms</td>
 </tr>
 <tr>
@@ -301,7 +343,7 @@ Proof, not claims — every featured repository is tested on every push:
 <tr>
 <td><b>Security</b></td>
 <td>DevSecOps · IAM · OAuth 2.0 · MFA · Access control in CI/CD</td>
-<td>Sigstore keyless signing · SBOM attestation · Kyverno (CEL) admission · Trivy · Semgrep · gitleaks</td>
+<td>Sigstore keyless signing · SBOM attestation · Kyverno (CEL) & custom Go (fail-closed) admission · Trivy · Semgrep · gitleaks</td>
 <td>SLSA provenance</td>
 </tr>
 <tr>
