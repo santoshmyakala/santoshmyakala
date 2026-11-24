@@ -22,9 +22,9 @@
 <br><br>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/impact-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/impact-light.svg">
-  <img alt="15+ years in IT; 12 years DevOps and cloud; 13 tested project repos; 13 Terraform stacks tested; 191 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/impact-dark.svg?v=3">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/impact-light.svg?v=3">
+  <img alt="15+ years in IT; 12 years DevOps and cloud; 18 tested project repos; 13 Terraform stacks tested; 391 automated tests in CI; 100% of images signed with SBOM" src="./assets/impact-dark.svg?v=3" width="100%">
 </picture>
 
 </div>
@@ -206,7 +206,7 @@ Eight DevSecOps architectures across platforms and lifecycle stages: GitHub, **G
 
 <table>
 <tr>
-<td colspan="2" valign="top">
+<td width="50%" valign="top">
 
 ### [ansible-llm-platform](https://github.com/santoshmyakala/ansible-llm-platform)
 A **self-hosted LLM platform provisioned end to end with Ansible**:
@@ -218,6 +218,20 @@ A **self-hosted LLM platform provisioned end to end with Ansible**:
 `Ansible` `llama.cpp` `vLLM` `Python` `nftables` `Prometheus` `Grafana` `Open WebUI`
 
 <sub>CI installs every role on a fresh VM with a real model, re-runs it (0 changes), then verifies answers, 401/429 and failover with a server stopped · 26 gateway tests · ansible-lint production profile</sub>
+
+</td>
+<td width="50%" valign="top">
+
+### [ai-guardrails-stack](https://github.com/santoshmyakala/ai-guardrails-stack)
+**Four guardrail layers around a tool-calling LLM agent**:
+- **input:** injection and jailbreak detection (also through encodings), checksum-validated PII redaction, topic filter;
+- **tool:** allowlists, scopes and strict arguments, an **OPA policy that fails closed**, human approvals bound to the exact arguments, a locked-down Docker sandbox;
+- **output:** leak prevention with a canary, grounding against sources, moderation, JSON validation;
+- **policy:** an HMAC-chained audit log, and a compliance map to OWASP LLM Top 10, the EU AI Act and NIST AI RMF.
+
+`Python` `FastAPI` `OPA / Rego` `Docker` `Pydantic` `Prometheus`
+
+<sub>95 pytest + 16 Rego tests against a real sandbox and OPA · red-team gate in CI: 87/89 attacks caught, 0/65 false positives, misses listed</sub>
 
 </td>
 </tr>
@@ -290,6 +304,7 @@ Proof, not claims — every featured repository is tested on every push:
 
 | Repository | CI |
 |---|---|
+| [ai-guardrails-stack](https://github.com/santoshmyakala/ai-guardrails-stack) | [![ci](https://github.com/santoshmyakala/ai-guardrails-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ai-guardrails-stack/actions/workflows/ci.yml) |
 | [ansible-llm-platform](https://github.com/santoshmyakala/ansible-llm-platform) | [![ci](https://github.com/santoshmyakala/ansible-llm-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/ansible-llm-platform/actions/workflows/ci.yml) |
 | [k8s-guardrails-webhook](https://github.com/santoshmyakala/k8s-guardrails-webhook) | [![ci](https://github.com/santoshmyakala/k8s-guardrails-webhook/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/k8s-guardrails-webhook/actions/workflows/ci.yml) |
 | [production-orders-service](https://github.com/santoshmyakala/production-orders-service) | [![ci](https://github.com/santoshmyakala/production-orders-service/actions/workflows/ci.yml/badge.svg)](https://github.com/santoshmyakala/production-orders-service/actions/workflows/ci.yml) |
