@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="170" viewBox="0 0 840 170" role="img" aria-label="All-time GitHub stats since Aug 2019: 298 contributions, 162 commits, 24 repositories, 47 active days, 3 longest streak, 8 years on GitHub">
+<title>GitHub activity — all time</title>
+<style>
+.tt{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#28272d} .st{font:400 12.5px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#626168;text-anchor:end}
+.v{font:700 26px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#4b4ba3;text-anchor:middle;transform-box:fill-box;transform-origin:center;animation:pop .8s cubic-bezier(.2,.7,.2,1) both}
+.l{font:400 12.5px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#626168;text-anchor:middle} .ft{font:400 12px -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#626168}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){.v{animation:none}}
+</style>
+<rect x=".5" y=".5" width="839" height="169" rx="14" fill="#ffffff" stroke="#dcdcde"/>
+<text x="24" y="36" class="tt">GitHub activity — all time</text>
+<text x="818" y="35" class="st">since Aug 2019</text>
+<text x="90.0" y="102" class="v" style="animation-delay:0.00s">298</text><text x="90.0" y="124" class="l">contributions</text><line x1="156.0" y1="74" x2="156.0" y2="126" stroke="#dcdcde"/><text x="222.0" y="102" class="v" style="animation-delay:0.08s">162</text><text x="222.0" y="124" class="l">commits</text><line x1="288.0" y1="74" x2="288.0" y2="126" stroke="#dcdcde"/><text x="354.0" y="102" class="v" style="animation-delay:0.16s">24</text><text x="354.0" y="124" class="l">repositories</text><line x1="420.0" y1="74" x2="420.0" y2="126" stroke="#dcdcde"/><text x="486.0" y="102" class="v" style="animation-delay:0.24s">47</text><text x="486.0" y="124" class="l">active days</text><line x1="552.0" y1="74" x2="552.0" y2="126" stroke="#dcdcde"/><text x="618.0" y="102" class="v" style="animation-delay:0.32s">3</text><text x="618.0" y="124" class="l">longest streak</text><line x1="684.0" y1="74" x2="684.0" y2="126" stroke="#dcdcde"/><text x="750.0" y="102" class="v" style="animation-delay:0.40s">8</text><text x="750.0" y="124" class="l">years on GitHub</text>
+<text x="24" y="150" class="ft">public contributions across all repositories · updated 2026-11-28</text>
+</svg>
